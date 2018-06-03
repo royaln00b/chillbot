@@ -11,6 +11,7 @@ import datetime
 import dbhandler
 import os
 
+
 dbhandler.create_table()
        
 tday = datetime.date.today()
