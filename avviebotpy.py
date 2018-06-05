@@ -14,8 +14,6 @@ import os
 
 dbhandler.create_table()
        
-tday = datetime.date.today()
-       
 bot=commands.Bot(description="Chill bot for Avvie's chill server a.k.a the greatest server you will be a part of. This bot was brought to you by royalnoob. Built from scratch.",command_prefix="-",pm_help=False)
        
 bot.remove_command('help')
@@ -491,7 +489,7 @@ async def weeb():
        
 @bot.command()
 async def date():
-    await bot.say(tday)
+    await bot.say(datetime.date.today())
        
 @bot.command(aliases=["cheat","broken"])
 async def mug():
