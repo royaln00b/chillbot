@@ -1145,7 +1145,7 @@ async def on_member_join(member):
     if member.server.id == "413580303248916481":
         server = member.server
         fmt = '**Welcome {0.mention} to {1.name}**!'
-	await bot.add_roles(member,discord.utils.get(member.server.roles, name="Member"))
+        await bot.add_roles(member,discord.utils.get(member.server.roles, name="Member"))
         await bot.send_message(bot.get_channel("413580303248916483"), fmt.format(member, server))
        
 @bot.event
