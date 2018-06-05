@@ -19,7 +19,7 @@ bot=commands.Bot(description="Chill bot for Avvie's chill server a.k.a the great
 bot.remove_command('help')
        
 t = datetime.datetime.now()
- 
+
  
  
 @bot.command(pass_context=True)
