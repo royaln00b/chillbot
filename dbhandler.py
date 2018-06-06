@@ -45,8 +45,11 @@ def everyone():
 
 def getdaily(ctx):
 	c.execute('SELECT daily FROM avviebot WHERE userid= %s', (ctx.message.author.id,))
-	inted = c.fetchone()
-	floated = str(datetime.datetime.fromtimestamp(inted).strftime("%H:%M:%S"))
+	inted = str(c.fetchone())
+	data1 = inted.replace("(","")
+	data2 = data1.replace(")","")
+	data3 = data2.replace(",","")
+	floated = str(datetime.datetime.fromtimestamp(int(inted)).strftime("%H:%M:%S"))
 	return floated
 	
 
