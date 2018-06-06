@@ -50,7 +50,12 @@ def daily(ctx):
 	now = time.time()
 	dailytime = now + 86400
 	c.execute('SELECT daily FROM avviebot WHERE userid= %s', (ctx.message.author.id,))
-	if float(c.fetchone()) >= now or c.fetchone() is None:
+	inted = str(c.fetchone())
+	data1 = inted.replace("(","")
+	data2 = data1.replace(")","")
+	data3 = data2.replace(",","")
+	inted = float(data3)
+	if data3 >= now or c.fetchone() is None:
 		if "vip" in [y.name.lower() for y in ctx.message.author.roles]:
 			c.execute('UPDATE avviebot SET balance = balance + 200 WHERE userid = %s', (ctx.message.author.id,))
 			c.execute('UPDATE avviebot SET daily = %s WHERE userid = %s', (str(dailytime),ctx.message.author.id,))
