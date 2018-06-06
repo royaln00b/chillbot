@@ -149,12 +149,12 @@ async def help(ctx,*,command=None):
     if command == None:
         await bot.add_reaction(message = ctx.message, emoji = "✅")
         embed1 = discord.Embed(title = "Chill Bot" , description = "Hey! Welcome the the -help handbook.\nHere you can find out all the commands you can use in Avvie's Chill Server\nEnjoy your stay :)\nTo look at how to use a command do -help [command] to see how it works!\n\nIf you have any questions regarding the bot/commands, PM Royalnoob\nThanks to these amazing people the bot would not be as amazing as it is today!\nRoyalnoob\nCallum\nSesmic\nAvvie",colour = 0xEE82EE)
-        embed2 = discord.Embed(title = "Utility    Page 1 / 6" , description = "-status - Check if the bot is online\n-ping - Check the relay speed of the bot\n-uptime - See how long the bot has been online for\n-profile - Shows information about the member / yourself if left blank",colour = 0xEE82EE)
+        embed2 = discord.Embed(title = "Utility    Page 1 / 6" , description = "-status - Check if the bot is online\n-ping - Check the relay speed of the bot\n-uptime - See how long the bot has been online for\n-date - Show the date\n-profile - Shows information about the member / yourself if left blank",colour = 0xEE82EE)
         embed3 = discord.Embed(title = "Actions    Page 2 / 6" , description = "-hug - Hug a member\n-kiss - Kiss a member\n-lick - Lick another member\n-slap - Slap another member\n-pat - Pat another member\n-cuddle - Cuddle woth another member\n-pout - To pout\n-bite - Bite another member",colour = 0xEE82EE)
         embed4 = discord.Embed(title = "Chill Currency    Page 3 / 6" , description = "-balance/-b - Check your balance\n-leaderboard/-l - Check who the top 5 richest people on the server are\n-daily - Collect your daily Chill Coins\n-level - Check what level you are\n-xp - Check how much xp you have\n-donate - Donate your coins to another member\n-shop - See what you can buy with your Chill Coins",colour = 0xEE82EE)
         embed5 = discord.Embed(title = "Games    Page 4 / 6" , description = "-8ball - Ask the Chill Bot a yes or no question\n-guess - Guess a random number between 1 and 10\n-flip - Flip a coin\n-rps - Rock paper scissors\n-coinflip - Flip a coin and earn chill currency\n-slot - (VIP only) Run a slot machine with a max prize of 10x your bet!\n-rtd - Roll The dice. Roll a 5 or 6 and you win!",colour = 0xEE82EE)  
         embed6 = discord.Embed(title = "Self Assignable Roles    Page 5 / 6" , description = "-colors - Check what colors you can assign\n-colorme - Add yourself to a color\n-uncolorme - Remove yourself from a color",colour = 0xEE82EE)
-        embed7 = discord.Embed(title = "Pings    Page 6 / 6" , description = "-mug - Pings the maker of Chill bot!\n-siccwan - Pings the server owner\n-neko - Pings the owner's partner\n-yiff - Pings our local furry\n-urmomgay - Pings Callum\n-alwayswatching - Pings the big sister\n-kitty - Pings the kitty cat",colour = 0xEE82EE)   
+        embed7 = discord.Embed(title = "Pings    Page 6 / 6" , description = "-mug - Pings the maker of Chill bot!\n-siccwan - Pings the server owner\n-neko - Pings the chaotic neko\n-yiff - Pings our local furry\n-urmomgay - Pings Callum\n-alwayswatching - Pings the big sister",colour = 0xEE82EE)   
         message = await bot.send_message(ctx.message.author,embed=embed1)
         await bot.add_reaction(message = message, emoji = "▶")
         while keyz == "q":
@@ -274,9 +274,9 @@ async def help(ctx,*,command=None):
     elif command == "alwayswatching":
         await bot.add_reaction(message = ctx.message, emoji = "✅")
         await bot.send_message(ctx.message.author,"-alwayswatching [no argument needed]")
-    elif command == "kitty":
+    elif command == "date":
         await bot.add_reaction(message = ctx.message, emoji = "✅")
-        await bot.send_message(ctx.message.author,"-kitty [no argument needed]")
+        await bot.send_message(ctx.message.author,"-date [no argument needed]")
     elif command == "rtd":
         await bot.add_reaction(message = ctx.message, emoji = "✅")
         await bot.send_message(ctx.message.author,"-rtd [bet]")
@@ -466,10 +466,7 @@ async def slot(ctx,bet=None):
             await bot.say(ctx.message.author.display_name+", You need to input an amount to bet!")
     else:
         await bot.say(ctx.message.author.display_name+", This is a VIP command! You can buy VIP for 1000<:Coin:439199818447978508> using -buyvip")
-    
-@bot.command()
-async def kitty():
-    await bot.say("<:Neko:430776074130030593><@361496003548938251><:Neko:430776074130030593>") #done
+
        
 @bot.command()
 async def siccwan():
@@ -482,10 +479,7 @@ async def logs():
 @bot.command()
 async def lit():
     await bot.say(":fire::penguin: **PINGU** :penguin::fire:") #done
-       
-@bot.command()
-async def weeb():
-    await bot.say(":ramen: <@188299360159662080> :ramen:") #done
+
        
 @bot.command()
 async def date():
@@ -514,7 +508,7 @@ async def status():
            
 @bot.command()
 async def swedensucks():
-    await bot.say(":flag_se: <@129810600992833537> & <@188299360159662080> :3 :flag_se:") #done
+    await bot.say(":flag_se: <@188299360159662080> :3 :flag_se:") #done
        
 @bot.command()
 async def alwayswatching():
@@ -1077,10 +1071,10 @@ async def on_message(message,):
                 await bot.delete_message(message)
                 await bot.send_message(message.server.get_channel("432519294962761731"), "Message deleted because it contained a link. Author was : "+str(message.author.display_name))
            
-    if message.content.upper() == "KITTY":
+"""    if message.content.upper() == "":
         await bot.add_reaction(message, "\U0001F36A")
         await bot.add_reaction(message, "\U0001F37C")
-        
+"""        
     mention_match = re.match(r'<@!?(\d+)>', message.content)
     for word in contents:
         if mention_match and mention_match.group(1) == '425957421975076864':
