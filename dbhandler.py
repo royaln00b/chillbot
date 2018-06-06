@@ -43,6 +43,15 @@ def everyone():
 	lines = '\n'.join(f'{i+1}. {line}' for i, line in enumerate(rows))
 	return lines
 
+def getdaily(ctx):
+	c.execute('SELECT daily FROM avviebot WHERE userid= %s', (ctx.message.author.id,))
+	inted = str(c.fetchone())
+	data1 = inted.replace("(","")
+	data2 = data1.replace(")","")
+	data3 = data2.replace(",","")
+	floated = str(datetime.datetime.fromtimestamp(data3).strftime("%H:%M:%S"))
+	return floated
+	
 
 def daily(ctx):
 	now = int(time.time())
