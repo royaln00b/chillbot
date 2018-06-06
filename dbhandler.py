@@ -56,7 +56,7 @@ def daily(ctx):
 	data2 = data1.replace(")","")
 	data3 = data2.replace(",","")
 	floated = int(data3)
-	if floated >= now or floated == 0:
+	if floated >= now:
 		if "vip" in [y.name.lower() for y in ctx.message.author.roles]:
 			c.execute('UPDATE avviebot SET balance = balance + 200 WHERE userid = %s', (ctx.message.author.id,))
 			c.execute('UPDATE avviebot SET daily = %d WHERE userid = %s', (dailytime,ctx.message.author.id,))
@@ -65,6 +65,9 @@ def daily(ctx):
 			c.execute('UPDATE avviebot SET balance = balance + 100 WHERE userid = %s', (ctx.message.author.id,))
 			c.execute('UPDATE avviebot SET daily = %d WHERE userid = %s', (dailytime,ctx.message.author.id,))
 			return True
+	elif floated == 0:
+		c.execute('UPDATE avviebot SET daily = %d WHERE userid = %s', (now,ctx.message.author.id,))
+		
 	else:
 		return False
 
