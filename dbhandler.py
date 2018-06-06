@@ -49,7 +49,7 @@ def getdaily(ctx):
 	data1 = inted.replace("(","")
 	data2 = data1.replace(")","")
 	data3 = data2.replace(",","")
-	floated = str(datetime.datetime.fromtimestamp(int(inted)).strftime("%H:%M:%S"))
+	floated = str(datetime.datetime.fromtimestamp(int(data3)).strftime("%H:%M:%S"))
 	return floated
 	
 
