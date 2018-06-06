@@ -10,9 +10,6 @@ conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
 c = conn.cursor()
 
-def update():
-	c.execute('ALTER TABLE avviebot DROP COLUMN daily')
-	c.execute('ALTER TABLE avviebot ADD daily BIGINT NOT NULL DEFAULT(0)')
 
 def create_table():
     c.execute('CREATE TABLE IF NOT EXISTS avviebot(name TEXT, userid TEXT, balance INTEGER, xp BIGINT, level INTEGER, daily BIGINT)')
