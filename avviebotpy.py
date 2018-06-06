@@ -81,8 +81,7 @@ async def setmoney(member:discord.Member,amount):
 @bot.command(pass_context=True)
 async def donate(ctx,member:discord.Member,amount):
     await bot.say(dbhandler.donate(ctx,member,amount))
-       
-@commands.cooldown(1, 86400, commands.BucketType.user)
+
 @bot.command(pass_context=True, aliases=["d"])
 async def daily(ctx):
 	if dbhandler.daily(ctx) == True:
