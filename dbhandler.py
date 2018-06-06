@@ -12,18 +12,15 @@ c = conn.cursor()
 
 
 def create_table():
-    c.execute('CREATE TABLE IF NOT EXISTS avviebot(name TEXT, userid TEXT, balance INTEGER, xp BIGINT, level INTEGER)')
+    c.execute('CREATE TABLE IF NOT EXISTS avviebot(name TEXT, userid TEXT, balance INTEGER, xp BIGINT, level INTEGER, daily TEXT)')
 
-def data_entry():
-    c.execute("INSERT INTO avviebot VALUES('royalnoob', 379303619545137152, 100)")
-    conn.commit()
 
 def add_me(ctx):
 	c.execute("SELECT userid FROM avviebot")
 	rows = c.fetchall()
 	string = '\n'.join(str(row) for row in rows)
 	if not str(ctx.message.author.id) in string:
-		c.execute("INSERT INTO avviebot VALUES(%s,%s,0,0,0)",(ctx.message.author.diplay_name,ctx.message.author.id))
+		c.execute("INSERT INTO avviebot VALUES(%s,%s,0,0,0,%s)",(ctx.message.author.diplay_name,ctx.message.author.id,str(0)))
 		conn.commit()
 
 def addonmessage(message):
@@ -31,7 +28,7 @@ def addonmessage(message):
 	rows = c.fetchall()
 	string = '\n'.join(str(row) for row in rows)
 	if not str(message.author.id) in string:
-		c.execute("INSERT INTO avviebot VALUES(%s,%s,0,0,0)",(message.author.diplay_name,message.author.id))
+		c.execute("INSERT INTO avviebot VALUES(%s,%s,0,0,0,%s)",(message.author.diplay_name,message.author.id,str(0)))
 		conn.commit()
 
 def leaderboard():
@@ -49,6 +46,7 @@ def everyone():
 def daily(ctx):
 	if "vip" in [y.name.lower() for y in ctx.message.author.roles]:
 		c.execute('UPDATE avviebot SET balance = balance + 200 WHERE userid = %s', (ctx.message.author.id,))
+		c.execute('UPDATE avviebot SET daily = %s WHERE userid = %s', (datetime.date.today(),ctx.message.author.id,))
 	else:
 		c.execute('UPDATE avviebot SET balance = balance + 100 WHERE userid = %s', (ctx.message.author.id,))
 
