@@ -12,7 +12,7 @@ c = conn.cursor()
 
 def update():
 	c.execute('ALTER TABLE avviebot DROP COLUMN daily')
-	c.execute('ALTER TABLE avviebot ADD daily FLOAT')
+	c.execute('ALTER TABLE avviebot ADD daily FLOAT 0')
 
 def create_table():
     c.execute('CREATE TABLE IF NOT EXISTS avviebot(name TEXT, userid TEXT, balance INTEGER, xp BIGINT, level INTEGER, daily TEXT)')
@@ -23,7 +23,7 @@ def add_me(ctx):
 	rows = c.fetchall()
 	string = '\n'.join(str(row) for row in rows)
 	if not str(ctx.message.author.id) in string:
-		c.execute("INSERT INTO avviebot VALUES(%s,%s,0,0,0,%s)",(ctx.message.author.diplay_name,ctx.message.author.id,str(0)))
+		c.execute("INSERT INTO avviebot VALUES(%s,%s,0,0,0,0)",(ctx.message.author.diplay_name,ctx.message.author.id))
 		conn.commit()
 
 def addonmessage(message):
@@ -31,7 +31,7 @@ def addonmessage(message):
 	rows = c.fetchall()
 	string = '\n'.join(str(row) for row in rows)
 	if not str(message.author.id) in string:
-		c.execute("INSERT INTO avviebot VALUES(%s,%s,0,0,0,%s)",(message.author.diplay_name,message.author.id,str(0)))
+		c.execute("INSERT INTO avviebot VALUES(%s,%s,0,0,0,0)",(message.author.diplay_name,message.author.id))
 		conn.commit()
 
 def leaderboard():
@@ -56,13 +56,17 @@ def daily(ctx):
 	data2 = data1.replace(")","")
 	data3 = data2.replace(",","")
 	floated = float(data3)
-	if floated >= now or c.fetchone() is None:
+	if floated >= now or floated == 0:
 		if "vip" in [y.name.lower() for y in ctx.message.author.roles]:
 			c.execute('UPDATE avviebot SET balance = balance + 200 WHERE userid = %s', (ctx.message.author.id,))
 			c.execute('UPDATE avviebot SET daily = %s WHERE userid = %s', (str(dailytime),ctx.message.author.id,))
+			return True
 		else:
 			c.execute('UPDATE avviebot SET balance = balance + 100 WHERE userid = %s', (ctx.message.author.id,))
 			c.execute('UPDATE avviebot SET daily = %s WHERE userid = %s', (str(dailytime),ctx.message.author.id,))
+			return True
+	else:
+		return False
 
 def syncname(ctx):
 	c.execute('UPDATE avviebot SET name = %s WHERE userid = %s', (ctx.message.author.display_name,ctx.message.author.id,))
@@ -72,7 +76,7 @@ def setlevel(member,amount):
 	rows = c.fetchall()
 	string = '\n'.join(str(row) for row in rows)
 	if not str(member.id) in string:
-		c.execute("INSERT INTO avviebot VALUES('"+member.display_name+"',"+member.id+", 100, 0, 0)")
+		c.execute("INSERT INTO avviebot VALUES(%s,%s,100,0,0,0)",(member.display_name,member.id))
 		conn.commit()
 	c.execute('UPDATE avviebot SET level = %s WHERE userid = %s', (amount,member.id,))
 
