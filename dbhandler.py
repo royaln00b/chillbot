@@ -42,13 +42,19 @@ def everyone():
 	rows = c.fetchall()
 	lines = '\n'.join(f'{i+1}. {line}' for i, line in enumerate(rows))
 	return lines
-	
+
+
 def daily(ctx):
-	if "vip" in [y.name.lower() for y in ctx.message.author.roles]:
-		c.execute('UPDATE avviebot SET balance = balance + 200 WHERE userid = %s', (ctx.message.author.id,))
-		c.execute('UPDATE avviebot SET daily = %s WHERE userid = %s', (datetime.date.today(),ctx.message.author.id,))
-	else:
-		c.execute('UPDATE avviebot SET balance = balance + 100 WHERE userid = %s', (ctx.message.author.id,))
+	now = time.time()
+	dailytime = now + 86400
+	c.execute('SELECT daily FROM avviebot WHERE userid= %s', (ctx.message.author.id,))
+	if int(c.fetchone()) >= now:
+		if "vip" in [y.name.lower() for y in ctx.message.author.roles]:
+			c.execute('UPDATE avviebot SET balance = balance + 200 WHERE userid = %s', (ctx.message.author.id,))
+			c.execute('UPDATE avviebot SET daily = %s WHERE userid = %s', (str(dailytime),ctx.message.author.id,))
+		else:
+			c.execute('UPDATE avviebot SET balance = balance + 100 WHERE userid = %s', (ctx.message.author.id,))
+			c.execute('UPDATE avviebot SET daily = %s WHERE userid = %s', (str(dailytime),ctx.message.author.id,))
 
 def syncname(ctx):
 	c.execute('UPDATE avviebot SET name = %s WHERE userid = %s', (ctx.message.author.display_name,ctx.message.author.id,))
