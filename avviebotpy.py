@@ -92,7 +92,7 @@ async def daily(ctx):
 			embed = discord.Embed(title="Daily | "+ctx.message.author.display_name,description="**Added 100<:Coin:439199818447978508>!**\nBe sure to use -daily again tomorrow to gain another 100<:Coin:439199818447978508>!",colour=0x00FF15)
 	else:
 		await bot.add_reaction(message = ctx.message, emoji = "🚫")
-		embed = discord.Embed(title="Daily | "+ctx.message.author.display_name,description="You have already claimed your daily today!")
+		embed = discord.Embed(title="Daily | "+ctx.message.author.display_name,description="You have already claimed your daily today!\nYou can use this command again at "+dbhandler.getdaily(ctx)+" tomorrow!")
 	await bot.say(embed=embed)
            
        
