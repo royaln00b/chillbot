@@ -54,7 +54,7 @@ def daily(ctx):
 	data1 = inted.replace("(","")
 	data2 = data1.replace(")","")
 	data3 = data2.replace(",","")
-	if data3 is None:
+	if data3 == None:
 		data3 = 0
 	floated = float(data3)
 	if floated >= now or c.fetchone() is None:
