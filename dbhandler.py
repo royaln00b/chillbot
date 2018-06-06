@@ -12,10 +12,10 @@ c = conn.cursor()
 
 def update():
 	c.execute('ALTER TABLE avviebot DROP COLUMN daily')
-	c.execute('ALTER TABLE avviebot ADD daily FLOAT(0.0)')
+	c.execute('ALTER TABLE avviebot ADD daily BIGINT(0.0)')
 
 def create_table():
-    c.execute('CREATE TABLE IF NOT EXISTS avviebot(name TEXT, userid TEXT, balance INTEGER, xp BIGINT, level INTEGER, daily TEXT)')
+    c.execute('CREATE TABLE IF NOT EXISTS avviebot(name TEXT, userid TEXT, balance INTEGER, xp BIGINT, level INTEGER, daily BIGINT)')
 
 
 def add_me(ctx):
@@ -48,22 +48,22 @@ def everyone():
 
 
 def daily(ctx):
-	now = time.time()
+	now = int(time.time())
 	dailytime = now + 86400
 	c.execute('SELECT daily FROM avviebot WHERE userid= %s', (ctx.message.author.id,))
 	inted = str(c.fetchone())
 	data1 = inted.replace("(","")
 	data2 = data1.replace(")","")
 	data3 = data2.replace(",","")
-	floated = float(data3)
+	floated = int(data3)
 	if floated >= now or floated == 0:
 		if "vip" in [y.name.lower() for y in ctx.message.author.roles]:
 			c.execute('UPDATE avviebot SET balance = balance + 200 WHERE userid = %s', (ctx.message.author.id,))
-			c.execute('UPDATE avviebot SET daily = %s WHERE userid = %s', (str(dailytime),ctx.message.author.id,))
+			c.execute('UPDATE avviebot SET daily = %s WHERE userid = %s', (dailytime,ctx.message.author.id,))
 			return True
 		else:
 			c.execute('UPDATE avviebot SET balance = balance + 100 WHERE userid = %s', (ctx.message.author.id,))
-			c.execute('UPDATE avviebot SET daily = %s WHERE userid = %s', (str(dailytime),ctx.message.author.id,))
+			c.execute('UPDATE avviebot SET daily = %s WHERE userid = %s', (dailytime,ctx.message.author.id,))
 			return True
 	else:
 		return False
