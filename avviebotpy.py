@@ -1158,7 +1158,8 @@ zkey = "q"
 @bot.event
 async def on_ready():
 	embed=discord.Embed(title=None,description="Bot Online",colour=0xEE82EE)
-	await bot.send_message(server.get_channel("418998532305846272"), embed=embed)
+	channel = discord.utils.get(bot.get_all_channels(), server__name="Avvie's Chill Server :3", name='chill-bot-test')
+	await bot.send_message(channel, embed=embed)
 	while zkey == "q":
 		await asyncio.sleep(30)
 		await bot.change_presence(game=discord.Game(type=1, name="with Royalnoob"))
