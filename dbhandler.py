@@ -59,14 +59,14 @@ def daily(ctx):
 	if floated >= now:
 		if "vip" in [y.name.lower() for y in ctx.message.author.roles]:
 			c.execute('UPDATE avviebot SET balance = balance + 200 WHERE userid = %s', (ctx.message.author.id,))
-			c.execute('UPDATE avviebot SET daily = %d WHERE userid = %s', (dailytime,ctx.message.author.id,))
+			c.execute('UPDATE avviebot SET daily = %s WHERE userid = %s', (dailytime,ctx.message.author.id,))
 			return True
 		else:
 			c.execute('UPDATE avviebot SET balance = balance + 100 WHERE userid = %s', (ctx.message.author.id,))
-			c.execute('UPDATE avviebot SET daily = %d WHERE userid = %s', (dailytime,ctx.message.author.id,))
+			c.execute('UPDATE avviebot SET daily = %s WHERE userid = %s', (dailytime,ctx.message.author.id,))
 			return True
 	elif floated == 0:
-		c.execute('UPDATE avviebot SET daily = %d WHERE userid = %s', (now,ctx.message.author.id,))
+		c.execute('UPDATE avviebot SET daily = %s WHERE userid = %s', (now,ctx.message.author.id,))
 		
 	else:
 		return False
