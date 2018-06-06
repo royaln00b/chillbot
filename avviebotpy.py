@@ -13,7 +13,7 @@ import os
 
 
 dbhandler.create_table()
-dbhandler.update()
+
 
        
 bot=commands.Bot(description="Chill bot for Avvie's chill server a.k.a the greatest server you will be a part of. This bot was brought to you by royalnoob. Built from scratch.",command_prefix="-",pm_help=False)
