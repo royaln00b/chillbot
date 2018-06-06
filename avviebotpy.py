@@ -1157,7 +1157,7 @@ async def on_member_remove(member):
 zkey = "q"
 @bot.event
 async def on_ready():
-	embed=discord.Embed(title=None,description="Bot Online",colour=0xEE82EE)
+	embed=discord.Embed(title="Bot restart",description="✅ All systems good ✅",colour=0xEE82EE)
 	channel = discord.utils.get(bot.get_all_channels(), server__name="Avvie's Chill Server :3", name='chill-bot-test')
 	await bot.send_message(channel, embed=embed)
 	while zkey == "q":
