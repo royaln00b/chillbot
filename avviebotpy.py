@@ -85,13 +85,16 @@ async def donate(ctx,member:discord.Member,amount):
 @commands.cooldown(1, 86400, commands.BucketType.user)
 @bot.command(pass_context=True, aliases=["d"])
 async def daily(ctx):
-    await bot.add_reaction(message = ctx.message, emoji = "✅")
-    dbhandler.daily(ctx)
-    if "vip" in [y.name.lower() for y in ctx.message.author.roles]:
-        embed = discord.Embed(title="Daily | "+ctx.message.author.display_name+" | VIP",description="**Added 200<:Coin:439199818447978508>!**\nBe sure to use -daily again tomorrow to gain another 200<:Coin:439199818447978508>!",colour=0x00FF15)
-    else:
-        embed = discord.Embed(title="Daily | "+ctx.message.author.display_name,description="**Added 100<:Coin:439199818447978508>!**\nBe sure to use -daily again tomorrow to gain another 100<:Coin:439199818447978508>!",colour=0x00FF15)
-    await bot.say(embed=embed)
+	if dbhandler.daily(ctx) == True:
+		await bot.add_reaction(message = ctx.message, emoji = "✅")
+		if "vip" in [y.name.lower() for y in ctx.message.author.roles]:
+			embed = discord.Embed(title="Daily | "+ctx.message.author.display_name+" | VIP",description="**Added 200<:Coin:439199818447978508>!**\nBe sure to use -daily again tomorrow to gain another 200<:Coin:439199818447978508>!",colour=0x00FF15)
+		else:
+			embed = discord.Embed(title="Daily | "+ctx.message.author.display_name,description="**Added 100<:Coin:439199818447978508>!**\nBe sure to use -daily again tomorrow to gain another 100<:Coin:439199818447978508>!",colour=0x00FF15)
+	else:
+		await bot.add_reaction(message = ctx.message, emoji = "🚫")
+		embed = discord.Embed(title="Daily | "+ctx.message.author.display_name,description="You have already claimed your daily today!")
+	await bot.say(embed=embed)
            
        
 @bot.command(pass_context=True)
