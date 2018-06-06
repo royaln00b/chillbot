@@ -1069,12 +1069,8 @@ async def on_message(message,):
         if message.channel.id != "414249270464610316":
             if not "links" in [y.name.lower() for y in message.author.roles]:
                 await bot.delete_message(message)
-                await bot.send_message(message.server.get_channel("432519294962761731"), "Message deleted because it contained a link. Author was : "+str(message.author.display_name))
-           
-"""    if message.content.upper() == "":
-        await bot.add_reaction(message, "\U0001F36A")
-        await bot.add_reaction(message, "\U0001F37C")
-"""        
+                await bot.send_message(message.server.get_channel("432519294962761731"), "Message deleted because it contained a link. Author was : "+str(message.author.display_name)) 
+
     mention_match = re.match(r'<@!?(\d+)>', message.content)
     for word in contents:
         if mention_match and mention_match.group(1) == '425957421975076864':
