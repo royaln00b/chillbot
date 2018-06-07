@@ -97,8 +97,8 @@ async def daily(ctx):
 		await bot.say(embed=embed)
 	else:
 		userID = ctx.message.author.id
-                await bot.delete_message(ctx.message)
-                await bot.say(" Hey <@%s> You need to be in <#419010194673106944> to use -daily !" % (userID))
+		await bot.delete_message(ctx.message)
+		await bot.say(" Hey <@%s> You need to be in <#419010194673106944> to use -daily !" % (userID))
 		
            
        
