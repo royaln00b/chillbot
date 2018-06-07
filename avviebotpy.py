@@ -37,18 +37,19 @@ async def shop(ctx):
     await bot.send_message(ctx.message.author, embed=embed) 
         
 @bot.command(pass_context=True)
-async def buyvip(ctx):
-    if not "vip" in [y.name.lower() for y in ctx.message.author.roles]:
-        if dbhandler.buyvip(ctx) == True:
-            await bot.add_roles(ctx.message.author,discord.utils.get(ctx.message.server.roles, name="VIP"))
-            embed=discord.Embed(title="VIP! | "+ctx.message.author.display_name,description="You bought VIP for 1000<:Coin:439199818447978508>!",colour=0xF4B642)
-            await bot.say(embed=embed)
-        else:
-            embed=discord.Embed(title="Balance Error! | "+ctx.message.author.display_name,description="You don't have the 1000<:Coin:439199818447978508> to buy VIP!",colour=0xFF0000)
-            await bot.say(embed=embed)
-    else:
-        embed=discord.Embed(title="VIP Error! | "+ctx.message.author.display_name,description="You already have VIP!",colour=0xFF0000)
-        await bot.say(embed=embed)
+async def buy(ctx,*,item):
+	if item.upper() == "VIP":
+		if not "vip" in [y.name.lower() for y in ctx.message.author.roles]:
+			if dbhandler.buyvip(ctx) == True:
+				await bot.add_roles(ctx.message.author,discord.utils.get(ctx.message.server.roles, name="VIP"))
+				embed=discord.Embed(title="VIP! | "+ctx.message.author.display_name,description="You bought VIP for 1000<:Coin:439199818447978508>!",colour=0xF4B642)
+				await bot.say(embed=embed)
+			else:
+				embed=discord.Embed(title="Balance Error! | "+ctx.message.author.display_name,description="You don't have the 1000<:Coin:439199818447978508> to buy VIP!",colour=0xFF0000)
+				await bot.say(embed=embed)
+		else:
+			embed=discord.Embed(title="VIP Error! | "+ctx.message.author.display_name,description="You already have VIP!",colour=0xFF0000)
+			await bot.say(embed=embed)
     
 @commands.has_role("Management")
 @bot.command()
