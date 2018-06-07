@@ -75,27 +75,113 @@ async def buy(ctx,*,item):
 			embed=discord.Embed(title="BUY Error! | "+ctx.message.author.display_name,description="You already have this rank!!",colour=0xFF0000)
 			await bot.say(embed=embed)
 	elif item.upper() == "NEKO TAMER":
-		await bot.say("Ok :P")
+		if not "neko tamer" in [y.name.lower() for y in ctx.message.author.roles]:
+			if dbhandler.buy(ctx,item) == True:
+				await bot.add_roles(ctx.message.author,discord.utils.get(ctx.message.server.roles, name="Neko Tamer"))
+				embed=discord.Embed(title="BUY! | "+ctx.message.author.display_name,description="You bought Neko Tamer for 7500<:Coin:439199818447978508>!",colour=0xF4B642)
+				await bot.say(embed=embed)
+			else:
+				embed=discord.Embed(title="Balance Error! | "+ctx.message.author.display_name,description="You don't have the 7500<:Coin:439199818447978508> to buy this rank!",colour=0xFF0000)
+				await bot.say(embed=embed)
+		else:
+			embed=discord.Embed(title="BUY Error! | "+ctx.message.author.display_name,description="You already have this rank!!",colour=0xFF0000)
+			await bot.say(embed=embed)
 	elif item.upper() == "DERP":
-		await bot.say("Ok :P")
+		if not "derp" in [y.name.lower() for y in ctx.message.author.roles]:
+			if dbhandler.buy(ctx,item) == True:
+				await bot.add_roles(ctx.message.author,discord.utils.get(ctx.message.server.roles, name="Derp"))
+				embed=discord.Embed(title="BUY! | "+ctx.message.author.display_name,description="You bought Derp for 1<:Coin:439199818447978508>!",colour=0xF4B642)
+				await bot.say(embed=embed)
+			else:
+				embed=discord.Embed(title="Balance Error! | "+ctx.message.author.display_name,description="You don't have the 1<:Coin:439199818447978508> to buy this rank!",colour=0xFF0000)
+				await bot.say(embed=embed)
+		else:
+			embed=discord.Embed(title="BUY Error! | "+ctx.message.author.display_name,description="You already have this rank!!",colour=0xFF0000)
+			await bot.say(embed=embed)
 	elif item.upper() == "LITTLE NUB":
-		await bot.say("Ok :P")
+		if not "little nub" in [y.name.lower() for y in ctx.message.author.roles]:
+			if dbhandler.buy(ctx,item) == True:
+				await bot.add_roles(ctx.message.author,discord.utils.get(ctx.message.server.roles, name="Little Nub"))
+				embed=discord.Embed(title="BUY! | "+ctx.message.author.display_name,description="You bought Little Nub for 1000<:Coin:439199818447978508>!",colour=0xF4B642)
+				await bot.say(embed=embed)
+			else:
+				embed=discord.Embed(title="Balance Error! | "+ctx.message.author.display_name,description="You don't have the 1000<:Coin:439199818447978508> to buy this rank!",colour=0xFF0000)
+				await bot.say(embed=embed)
+		else:
+			embed=discord.Embed(title="BUY Error! | "+ctx.message.author.display_name,description="You already have this rank!!",colour=0xFF0000)
+			await bot.say(embed=embed)
 	elif item.upper() == "LOG WATCHER":
-		await bot.say("Ok :P")
+		if not "log watcher" in [y.name.lower() for y in ctx.message.author.roles]:
+			if dbhandler.buy(ctx,item) == True:
+				await bot.add_roles(ctx.message.author,discord.utils.get(ctx.message.server.roles, name="Log Watcher"))
+				embed=discord.Embed(title="BUY! | "+ctx.message.author.display_name,description="You bought Log Watcher for 4000<:Coin:439199818447978508>!",colour=0xF4B642)
+				await bot.say(embed=embed)
+			else:
+				embed=discord.Embed(title="Balance Error! | "+ctx.message.author.display_name,description="You don't have the 4000<:Coin:439199818447978508> to buy this rank!",colour=0xFF0000)
+				await bot.say(embed=embed)
+		else:
+			embed=discord.Embed(title="BUY Error! | "+ctx.message.author.display_name,description="You already have this rank!!",colour=0xFF0000)
+			await bot.say(embed=embed)
 	elif item.upper() == "MORE THAN A MEMBER":
-		await bot.say("Ok :P")
+		if not "more than a member" in [y.name.lower() for y in ctx.message.author.roles]:
+			if dbhandler.buy(ctx,item) == True:
+				await bot.add_roles(ctx.message.author,discord.utils.get(ctx.message.server.roles, name="More than a member"))
+				embed=discord.Embed(title="BUY! | "+ctx.message.author.display_name,description="You bought More than a member for 500<:Coin:439199818447978508>!",colour=0xF4B642)
+				await bot.say(embed=embed)
+			else:
+				embed=discord.Embed(title="Balance Error! | "+ctx.message.author.display_name,description="You don't have the 500<:Coin:439199818447978508> to buy this rank!",colour=0xFF0000)
+				await bot.say(embed=embed)
+		else:
+			embed=discord.Embed(title="BUY Error! | "+ctx.message.author.display_name,description="You already have this rank!!",colour=0xFF0000)
+			await bot.say(embed=embed)
 	elif item.upper() == "ROYALNOOB APPRENTICE":
-		await bot.say("Ok :P")
+		if not "royalnoob apprentice" in [y.name.lower() for y in ctx.message.author.roles]:
+			if dbhandler.buy(ctx,item) == True:
+				await bot.add_roles(ctx.message.author,discord.utils.get(ctx.message.server.roles, name="Royalnoob Apprentice"))
+				embed=discord.Embed(title="BUY! | "+ctx.message.author.display_name,description="You bought Royalnoob Apprentice for 40000<:Coin:439199818447978508>!",colour=0xF4B642)
+				await bot.say(embed=embed)
+			else:
+				embed=discord.Embed(title="Balance Error! | "+ctx.message.author.display_name,description="You don't have the 40000<:Coin:439199818447978508> to buy this rank!",colour=0xFF0000)
+				await bot.say(embed=embed)
+		else:
+			embed=discord.Embed(title="BUY Error! | "+ctx.message.author.display_name,description="You already have this rank!!",colour=0xFF0000)
+			await bot.say(embed=embed)
 	elif item.upper() == "CH177 8OT FR13ND":
-		await bot.say("Ok :P")
-	elif item.upper() == "BALLER":
-		await bot.say("Ok :P")
-	elif item.upper() == "MILLIONAIRE":
-		await bot.say("Ok :P")
+		if not "ch177 8ot fr13nd" in [y.name.lower() for y in ctx.message.author.roles]:
+			if dbhandler.buy(ctx,item) == True:
+				await bot.add_roles(ctx.message.author,discord.utils.get(ctx.message.server.roles, name="CH177 8OT FR13ND"))
+				embed=discord.Embed(title="BUY! | "+ctx.message.author.display_name,description="You bought CH177 8OT FR13ND for 10000<:Coin:439199818447978508>!",colour=0xF4B642)
+				await bot.say(embed=embed)
+			else:
+				embed=discord.Embed(title="Balance Error! | "+ctx.message.author.display_name,description="You don't have the 10000<:Coin:439199818447978508> to buy this rank!",colour=0xFF0000)
+				await bot.say(embed=embed)
+		else:
+			embed=discord.Embed(title="BUY Error! | "+ctx.message.author.display_name,description="You already have this rank!!",colour=0xFF0000)
+			await bot.say(embed=embed)
 	elif item.upper() == "NEW GAMBLER":
-		await bot.say("Ok :P")
+		if not "new gambler" in [y.name.lower() for y in ctx.message.author.roles]:
+			if dbhandler.buy(ctx,item) == True:
+				await bot.add_roles(ctx.message.author,discord.utils.get(ctx.message.server.roles, name="New Gambler"))
+				embed=discord.Embed(title="BUY! | "+ctx.message.author.display_name,description="You bought New Gambler for 100000<:Coin:439199818447978508>!",colour=0xF4B642)
+				await bot.say(embed=embed)
+			else:
+				embed=discord.Embed(title="Balance Error! | "+ctx.message.author.display_name,description="You don't have the 100000<:Coin:439199818447978508> to buy this rank!",colour=0xFF0000)
+				await bot.say(embed=embed)
+		else:
+			embed=discord.Embed(title="BUY Error! | "+ctx.message.author.display_name,description="You already have this rank!!",colour=0xFF0000)
+			await bot.say(embed=embed)
 	elif item.upper() == "ROLEPLAY MASTER":
-		await bot.say("Ok :P")
+		if not "roleplay master" in [y.name.lower() for y in ctx.message.author.roles]:
+			if dbhandler.buy(ctx,item) == True:
+				await bot.add_roles(ctx.message.author,discord.utils.get(ctx.message.server.roles, name="Roleplay Master"))
+				embed=discord.Embed(title="BUY! | "+ctx.message.author.display_name,description="You bought Roleplay Master for 25000<:Coin:439199818447978508>!",colour=0xF4B642)
+				await bot.say(embed=embed)
+			else:
+				embed=discord.Embed(title="Balance Error! | "+ctx.message.author.display_name,description="You don't have the 25000<:Coin:439199818447978508> to buy this rank!",colour=0xFF0000)
+				await bot.say(embed=embed)
+		else:
+			embed=discord.Embed(title="BUY Error! | "+ctx.message.author.display_name,description="You already have this rank!!",colour=0xFF0000)
+			await bot.say(embed=embed)
 	else:
 		embed=discord.Embed(title="Error! | "+ctx.message.author.display_name,description="I could not find this role.",colour=0xFF0000)
 		await bot.say(embed=embed)
