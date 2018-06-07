@@ -1127,9 +1127,10 @@ async def on_message_delete(message):
                                     if not message.content.startswith("next"):
                                         if not message.content.startswith("hit"):
                                             if not message.content.startswith("stay"):
-                                                fmt = "{0.author.name}'s message has been deleted: \n {0.content} \nFrom the channel : \n #" + str(message.channel.name)
-                                                embed=discord.Embed(title=None, description= fmt.format(message), colour = 0xFF0000)
-                                                await bot.send_message(message.server.get_channel("418998532305846272"), embed=embed)
+                                                if not message.content.startswith("-d"):
+                                                    fmt = "{0.author.name}'s message has been deleted: \n {0.content} \nFrom the channel : \n #" + str(message.channel.name)
+                                                    embed=discord.Embed(title=None, description= fmt.format(message), colour = 0xFF0000)
+                                                    await bot.send_message(message.server.get_channel("418998532305846272"), embed=embed)
        
 @bot.event
 async def on_message_edit(before, after):
