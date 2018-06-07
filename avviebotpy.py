@@ -51,18 +51,31 @@ async def buy(ctx,*,item):
 			embed=discord.Embed(title="VIP Error! | "+ctx.message.author.display_name,description="You already have VIP!",colour=0xFF0000)
 			await bot.say(embed=embed)
 	elif item.upper() == "THE MEME MACHINE":
+		await bot.say("Ok :P")
 	elif item.upper() == "LOLI LEWDER":
+		await bot.say("Ok :P")
 	elif item.upper() == "NEKO TAMER":
+		await bot.say("Ok :P")
 	elif item.upper() == "DERP":
+		await bot.say("Ok :P")
 	elif item.upper() == "LITTLE NUB":
+		await bot.say("Ok :P")
 	elif item.upper() == "LOG WATCHER":
+		await bot.say("Ok :P")
 	elif item.upper() == "MORE THAN A MEMBER":
+		await bot.say("Ok :P")
 	elif item.upper() == "ROYALNOOB APPRENTICE":
+		await bot.say("Ok :P")
 	elif item.upper() == "CH177 8OT FR13ND":
+		await bot.say("Ok :P")
 	elif item.upper() == "BALLER":
+		await bot.say("Ok :P")
 	elif item.upper() == "MILLIONAIRE":
+		await bot.say("Ok :P")
 	elif item.upper() == "NEW GAMBLER":
+		await bot.say("Ok :P")
 	elif item.upper() == "ROLEPLAY MASTER":
+		await bot.say("Ok :P")
 	else:
 		embed=discord.Embed(title="Error! | "+ctx.message.author.display_name,description="I could not find this role.",colour=0xFF0000)
 		await bot.say(embed=embed)
