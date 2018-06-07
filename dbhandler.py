@@ -757,6 +757,12 @@ def buy(ctx,item):
 		if inted >= 1000:
 			c.execute('UPDATE avviebot SET balance = balance - 1000 WHERE userid = %s', (ctx.message.author.id,))
 			return True
+	if item.upper() == "THE MEME MACHINE":
+		if inted <= 4199:
+			return False
+		if inted >= 4200:
+			c.execute('UPDATE avviebot SET balance = balance - 4200 WHERE userid = %s', (ctx.message.author.id,))
+			return True
 
 def randomdrop(message):
 	c.execute('UPDATE avviebot SET balance = balance + 100 WHERE userid = %s',  (message.author.id,))
