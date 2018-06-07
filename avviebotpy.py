@@ -50,6 +50,22 @@ async def buy(ctx,*,item):
 		else:
 			embed=discord.Embed(title="VIP Error! | "+ctx.message.author.display_name,description="You already have VIP!",colour=0xFF0000)
 			await bot.say(embed=embed)
+	elif item.upper() == "THE MEME MACHINE":
+	elif item.upper() == "LOLI LEWDER":
+	elif item.upper() == "NEKO TAMER":
+	elif item.upper() == "DERP":
+	elif item.upper() == "LITTLE NUB":
+	elif item.upper() == "LOG WATCHER":
+	elif item.upper() == "MORE THAN A MEMBER":
+	elif item.upper() == "ROYALNOOB APPRENTICE":
+	elif item.upper() == "CH177 8OT FR13ND":
+	elif item.upper() == "BALLER":
+	elif item.upper() == "MILLIONAIRE":
+	elif item.upper() == "NEW GAMBLER":
+	elif item.upper() == "ROLEPLAY MASTER":
+	else:
+		embed=discord.Embed(title="Error! | "+ctx.message.author.display_name,description="I could not find this role.",colour=0xFF0000)
+		await bot.say(embed=embed)
     
 @commands.has_role("Management")
 @bot.command()
