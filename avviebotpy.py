@@ -40,7 +40,7 @@ async def shop(ctx):
 async def buy(ctx,*,item):
 	if item.upper() == "VIP":
 		if not "vip" in [y.name.lower() for y in ctx.message.author.roles]:
-			if dbhandler.buyvip(ctx) == True:
+			if dbhandler.buyvip(ctx,item) == True:
 				await bot.add_roles(ctx.message.author,discord.utils.get(ctx.message.server.roles, name="VIP"))
 				embed=discord.Embed(title="VIP! | "+ctx.message.author.display_name,description="You bought VIP for 1000<:Coin:439199818447978508>!",colour=0xF4B642)
 				await bot.say(embed=embed)
