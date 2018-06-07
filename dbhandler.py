@@ -769,6 +769,61 @@ def buy(ctx,item):
 		if inted >= 9000:
 			c.execute('UPDATE avviebot SET balance = balance - 9000 WHERE userid = %s', (ctx.message.author.id,))
 			return True
+	if item.upper() == "NEKO TAMER":
+		if inted <= 7499:
+			return False
+		if inted >= 7500:
+			c.execute('UPDATE avviebot SET balance = balance - 7500 WHERE userid = %s', (ctx.message.author.id,))
+			return True
+	if item.upper() == "DERP":
+		if inted <= 0:
+			return False
+		if inted >= 1:
+			c.execute('UPDATE avviebot SET balance = balance - 1 WHERE userid = %s', (ctx.message.author.id,))
+			return True
+	if item.upper() == "LITTLE NUB":
+		if inted <= 999:
+			return False
+		if inted >= 1000:
+			c.execute('UPDATE avviebot SET balance = balance - 1000 WHERE userid = %s', (ctx.message.author.id,))
+			return True
+	if item.upper() == "LOG WATCHER":
+		if inted <= 3999:
+			return False
+		if inted >= 4000:
+			c.execute('UPDATE avviebot SET balance = balance - 4000 WHERE userid = %s', (ctx.message.author.id,))
+			return True
+	if item.upper() == "MORE THAN A MEMBER":
+		if inted <= 499:
+			return False
+		if inted >= 500:
+			c.execute('UPDATE avviebot SET balance = balance - 500 WHERE userid = %s', (ctx.message.author.id,))
+			return True
+	if item.upper() == "ROYALNOOB APPRENTICE":
+		if inted <= 39999:
+			return False
+		if inted >= 40000:
+			c.execute('UPDATE avviebot SET balance = balance - 40000 WHERE userid = %s', (ctx.message.author.id,))
+			return True
+	if item.upper() == "CH177 8OT FR13ND":
+		if inted <= 9999:
+			return False
+		if inted >= 10000:
+			c.execute('UPDATE avviebot SET balance = balance - 10000 WHERE userid = %s', (ctx.message.author.id,))
+			return True
+	if item.upper() == "NEW GAMBLER":
+		if inted <= 99999:
+			return False
+		if inted >= 100000:
+			c.execute('UPDATE avviebot SET balance = balance - 100000 WHERE userid = %s', (ctx.message.author.id,))
+			return True
+	if item.upper() == "RP MASTER":
+		if inted <= 24999:
+			return False
+		if inted >= 25000:
+			c.execute('UPDATE avviebot SET balance = balance - 25000 WHERE userid = %s', (ctx.message.author.id,))
+			return True
+		
 
 def randomdrop(message):
 	c.execute('UPDATE avviebot SET balance = balance + 100 WHERE userid = %s',  (message.author.id,))
