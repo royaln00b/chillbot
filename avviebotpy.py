@@ -33,7 +33,7 @@ async def vip(ctx):
 @bot.command(pass_context=True)
 async def shop(ctx):
     await bot.add_reaction(message = ctx.message, emoji = "✅")
-    embed=discord.Embed(title="Shop",description="The current items for sale are:\n\n1  . VIP - use -vip to find out more!",colour=0xEE82EE)
+    embed=discord.Embed(title="Shop",description="The current items for sale are:\n\n1  . VIP (1000<:Coin:439199818447978508>) - use -vip to find out more\n2 . The Meme Machine(4200<:Coin:439199818447978508>)\n3 . Loli Lewder(9000<:Coin:439199818447978508>)\n4 . Neko Tamer(7500<:Coin:439199818447978508>)\n5 . Derp(1<:Coin:439199818447978508>)\n6 . Little Nub(1000<:Coin:439199818447978508>)\n7 . Log Watcher(4000<:Coin:439199818447978508>)\n8 . More than a member(500<:Coin:439199818447978508>)\n9 . Royalnoob Apprentice(40000<:Coin:439199818447978508>)\n10 . CH177 8OT FR13ND(10000<:Coin:439199818447978508>)\n11 . New Gambler(100000<:Coin:439199818447978508>)\n12 . Roleplay Master(25000<:Coin:439199818447978508>)!",colour=0xEE82EE)
     await bot.send_message(ctx.message.author, embed=embed) 
         
 @bot.command(pass_context=True)
