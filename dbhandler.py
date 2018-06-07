@@ -744,6 +744,19 @@ def buyvip(ctx):
 	if inted >= 1000:
 		c.execute('UPDATE avviebot SET balance = balance - 1000 WHERE userid = %s', (ctx.message.author.id,))
 		return True
+def buy(ctx,item):
+	c.execute('SELECT balance FROM avviebot WHERE userid= %s', (ctx.message.author.id,))
+	inted = str(c.fetchone())
+	data1 = inted.replace("(","")
+	data2 = data1.replace(")","")
+	data3 = data2.replace(",","")
+	inted = int(data3)
+	if item.upper() == "VIP":
+		if inted <= 999:
+			return False
+		if inted >= 1000:
+			c.execute('UPDATE avviebot SET balance = balance - 1000 WHERE userid = %s', (ctx.message.author.id,))
+			return True
 
 def randomdrop(message):
 	c.execute('UPDATE avviebot SET balance = balance + 100 WHERE userid = %s',  (message.author.id,))
