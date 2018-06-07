@@ -84,16 +84,22 @@ async def donate(ctx,member:discord.Member,amount):
 
 @bot.command(pass_context=True, aliases=["d"])
 async def daily(ctx):
-	if dbhandler.daily(ctx) == True:
-		await bot.add_reaction(message = ctx.message, emoji = "✅")
-		if "vip" in [y.name.lower() for y in ctx.message.author.roles]:
-			embed = discord.Embed(title="Daily | "+ctx.message.author.display_name+" | VIP",description="**Added 200<:Coin:439199818447978508>!**\nBe sure to use -daily again tomorrow to gain another 200<:Coin:439199818447978508>!",colour=0x00FF15)
+	if ctx.message.channel.id == "419010194673106944":
+		if dbhandler.daily(ctx) == True:
+			await bot.add_reaction(message = ctx.message, emoji = "✅")
+			if "vip" in [y.name.lower() for y in ctx.message.author.roles]:
+				embed = discord.Embed(title="Daily | "+ctx.message.author.display_name+" | VIP",description="**Added 200<:Coin:439199818447978508>!**\nBe sure to use -daily again tomorrow to gain another 200<:Coin:439199818447978508>!",colour=0x00FF15)
+			else:
+				embed = discord.Embed(title="Daily | "+ctx.message.author.display_name,description="**Added 100<:Coin:439199818447978508>!**\nBe sure to use -daily again tomorrow to gain another 100<:Coin:439199818447978508>!",colour=0x00FF15)
 		else:
-			embed = discord.Embed(title="Daily | "+ctx.message.author.display_name,description="**Added 100<:Coin:439199818447978508>!**\nBe sure to use -daily again tomorrow to gain another 100<:Coin:439199818447978508>!",colour=0x00FF15)
+			await bot.add_reaction(message = ctx.message, emoji = "🚫")
+			embed = discord.Embed(title="Daily | "+ctx.message.author.display_name,description="You have already claimed your daily today!\nYou can use this command again in "+dbhandler.getdaily(ctx)+" !",colour=0xFF0000)
+		await bot.say(embed=embed)
 	else:
-		await bot.add_reaction(message = ctx.message, emoji = "🚫")
-		embed = discord.Embed(title="Daily | "+ctx.message.author.display_name,description="You have already claimed your daily today!\nYou can use this command again in "+dbhandler.getdaily(ctx)+" !",colour=0xFF0000)
-	await bot.say(embed=embed)
+		userID = ctx.message.author.id
+                await bot.delete_message(ctx.message)
+                await bot.say(" Hey <@%s> You need to be in <#419010194673106944> to use -daily !" % (userID))
+		
            
        
 @bot.command(pass_context=True)
