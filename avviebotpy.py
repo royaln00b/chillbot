@@ -37,7 +37,7 @@ async def shop(ctx):
     await bot.send_message(ctx.message.author, embed=embed) 
         
 @bot.command(pass_context=True)
-async def buy(ctx,*,item):
+async def buy(ctx,*,item=None):
 	if item.upper() == "VIP":
 		if not "vip" in [y.name.lower() for y in ctx.message.author.roles]:
 			if dbhandler.buy(ctx,item) == True:
@@ -182,6 +182,9 @@ async def buy(ctx,*,item):
 		else:
 			embed=discord.Embed(title="BUY Error! | "+ctx.message.author.display_name,description="You already have this rank!!",colour=0xFF0000)
 			await bot.say(embed=embed)
+	elif item == None:
+		embed=discord.Embed(title="Error! | "+ctx.message.author.display_name,description="You need to input a role!.",colour=0xFF0000)
+		await bot.say(embed=embed)
 	else:
 		embed=discord.Embed(title="Error! | "+ctx.message.author.display_name,description="I could not find this role.",colour=0xFF0000)
 		await bot.say(embed=embed)
