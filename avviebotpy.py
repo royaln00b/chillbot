@@ -27,7 +27,7 @@ t = datetime.datetime.now()
 @bot.command(pass_context=True)
 async def vip(ctx):
     await bot.add_reaction(message = ctx.message, emoji = "✅")
-    embed=discord.Embed(title="- - VIP - -",description="VIP's get bonuses to their discord experience. These benefits are:\n\n1  . Double XP\n2 . Double daily coins\n3 . Access to the -slot command\n4 . Special VIP rank\n\nTo buy vip it costs 1000<:Coin:439199818447978508>\nType -buyvip in the server if you wish to purchase VIP",colour=0xEE82EE)
+    embed=discord.Embed(title="- - VIP - -",description="VIP's get bonuses to their discord experience. These benefits are:\n\n1  . Double XP\n2 . Double daily coins\n3 . Access to the -slot command\n4 . Special VIP rank\n\nTo buy vip it costs 1000<:Coin:439199818447978508>\nType `-buy vip` in the server if you wish to purchase VIP",colour=0xEE82EE)
     await bot.send_message(ctx.message.author, embed=embed)
     
 @bot.command(pass_context=True)
