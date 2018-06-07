@@ -817,11 +817,17 @@ def buy(ctx,item):
 		if inted >= 100000:
 			c.execute('UPDATE avviebot SET balance = balance - 100000 WHERE userid = %s', (ctx.message.author.id,))
 			return True
-	if item.upper() == "RP MASTER":
+	if item.upper() == "ROLEPLAY MASTER":
 		if inted <= 24999:
 			return False
 		if inted >= 25000:
 			c.execute('UPDATE avviebot SET balance = balance - 25000 WHERE userid = %s', (ctx.message.author.id,))
+			return True
+	if item.upper() == "YIFF LORD":
+		if inted <= 4999:
+			return False
+		if inted >= 5000:
+			c.execute('UPDATE avviebot SET balance = balance - 5000 WHERE userid = %s', (ctx.message.author.id,))
 			return True
 		
 
