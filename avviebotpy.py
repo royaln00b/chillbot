@@ -51,7 +51,17 @@ async def buy(ctx,*,item):
 			embed=discord.Embed(title="VIP Error! | "+ctx.message.author.display_name,description="You already have VIP!",colour=0xFF0000)
 			await bot.say(embed=embed)
 	elif item.upper() == "THE MEME MACHINE":
-		await bot.say("Ok :P")
+		if not "the meme machine" in [y.name.lower() for y in ctx.message.author.roles]:
+			if dbhandler.buyvip(ctx,item) == True:
+				await bot.add_roles(ctx.message.author,discord.utils.get(ctx.message.server.roles, name="The MEME machine"))
+				embed=discord.Embed(title="BUY! | "+ctx.message.author.display_name,description="You bought The MEME machine for 4200<:Coin:439199818447978508>!",colour=0xF4B642)
+				await bot.say(embed=embed)
+			else:
+				embed=discord.Embed(title="Balance Error! | "+ctx.message.author.display_name,description="You don't have the 4200<:Coin:439199818447978508> to buy this rank!",colour=0xFF0000)
+				await bot.say(embed=embed)
+		else:
+			embed=discord.Embed(title="BUY Error! | "+ctx.message.author.display_name,description="You already have this rank!!",colour=0xFF0000)
+			await bot.say(embed=embed)
 	elif item.upper() == "LOLI LEWDER":
 		await bot.say("Ok :P")
 	elif item.upper() == "NEKO TAMER":
