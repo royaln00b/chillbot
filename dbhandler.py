@@ -447,7 +447,7 @@ def xpcheck(message):
        c.execute('UPDATE avviebot SET level = level + 1 WHERE userid = %s', (message.author.id,))
        return True
        conn.commit()
-    elif inted >= 2200000 and inted2 <= 40:
+    elif inted >= 2200000 and inted2 < 40:
        c.execute('UPDATE avviebot SET level = level + 1 WHERE userid = %s', (message.author.id,))
        return True
        conn.commit()
