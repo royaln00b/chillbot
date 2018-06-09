@@ -701,9 +701,8 @@ async def profile(ctx,*,member:discord.Member=None):
 	achievements = "Achievements :"
 	achieves = 0
 	if member == None:
- 		member = ctx.message.author
-	roles = len(member.roles)
-	string = str(roles)
+		member = ctx.message.author
+	roles = [role.name for role in member.roles[1:]]
 	if "chill bot developer" in [y.name.lower() for y in member.roles]:
 		achievements = achievements + "\n:dizzy:**Chill Bot Developer**:dizzy:"
 		achieves = achieves + 1
