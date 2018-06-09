@@ -689,16 +689,24 @@ async def creator(ctx):
         await bot.say("Hello Royal :)")
     else:
         await bot.say("Hmmmm, you're not Royal -_-")
-       
+
+
+achievements = "Achievements :"
+baller = ""
+millionaire = ""
 @bot.command(pass_context=True)
 async def profile(ctx,*,member:discord.Member=None):
-    if member == None:
-        member = ctx.message.author
-    roles = [role.name for role in member.roles[1:]]
-    embed=discord.Embed(title = member.name , description="\n {0.display_name} has the role(s) of :\n**{1}**\n".format(member, " , ".join(roles))+ "\n"+member.display_name+" joined discord at : "+str(member.created_at)[:10]+"\nThey joined this server at : "+str(member.joined_at)[:10]+"\nCurrently playing : "+str(member.game)+"\nCurrent status : "+str(member.status)+"\n\n**Balance :** " +dbhandler.whoisbalance(member).format(member), colour = 0xEE82EE)
-    embed.set_thumbnail(url = member.avatar_url)
-    embed.set_image(url = str(dbhandler.whoislevel(member)))
-    await bot.say(embed=embed)
+	if member == None:
+ 		member = ctx.message.author
+	roles = [role.name for role in member.roles[1:]]
+	if "baller" in [y.name.lower() for y in ctx.message.author.roles]:
+		achievements = achievements + "\n:moneybag:Baller:moneybag:"
+	if "millionaire" in [y.name.lower() for y in ctx.message.author.roles]:
+		achievements = achievements + "\n:moneybag:Millionaire:moneybag:"
+	embed=discord.Embed(title = member.name , description="\n {0.display_name} has the role(s) of :\n**{1}**\n".format(member, " , ".join(roles))+ "\n"+member.display_name+" joined discord at : "+str(member.created_at)[:10]+"\nThey joined this server at : "+str(member.joined_at)[:10]+"\nCurrently playing : "+str(member.game)+"\nCurrent status : "+str(member.status)+"\n\n"+achievements+"\n\n**Balance :** " +dbhandler.whoisbalance(member).format(member), colour = 0xEE82EE)
+	embed.set_thumbnail(url = member.avatar_url)
+	embed.set_image(url = str(dbhandler.whoislevel(member)))
+	await bot.say(embed=embed)
        
 @commands.has_role("Rainbow")
 @bot.command(pass_context=True)
