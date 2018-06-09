@@ -311,6 +311,10 @@ keyz = "q"
        
 @bot.command(pass_context=True)
 async def help(ctx,*,command=None):
+    if not "informed" in [y.name.lower() for y in ctx.message.author.roles]:
+        await bot.add_roles(ctx.message.author,discord.utils.get(ctx.message.server.roles, name="Informed"))
+        embed = discord.Embed(title="Achievement! | "+message.author.display_name,description=message.author.display_name+" earnt the achievement :books:Informed:books: !",colour=0xEE82EE)
+        await bot.send_message(ctx.message.channel,embed=embed)
     if command == None:
         await bot.add_reaction(message = ctx.message, emoji = "✅")
         embed1 = discord.Embed(title = "Chill Bot" , description = "Hey! Welcome the the -help handbook.\nHere you can find out all the commands you can use in Avvie's Chill Server\nEnjoy your stay :)\nTo look at how to use a command do -help [command] to see how it works!\n\nIf you have any questions regarding the bot/commands, PM Royalnoob\nThanks to these amazing people the bot would not be as amazing as it is today!\nRoyalnoob\nCallum\nSesmic\nAvvie",colour = 0xEE82EE)
@@ -700,8 +704,10 @@ async def profile(ctx,*,member:discord.Member=None):
 	roles = [role.name for role in member.roles[1:]]
 	if "baller" in [y.name.lower() for y in ctx.message.author.roles]:
 		achievements = achievements + "\n:moneybag:Baller:moneybag:"
-	if "millionaire" in [y.name.lower() for y in ctx.message.author.roles]:
+	elif "millionaire" in [y.name.lower() for y in ctx.message.author.roles]:
 		achievements = achievements + "\n:moneybag:Millionaire:moneybag:"
+	elif "informed" in [y.name.lower() for y in ctx.message.author.roles]:
+		achievements = achievements + "\n:books:Informed:books:"
 	embed=discord.Embed(title = member.name , description="\n {0.display_name} has the role(s) of :\n**{1}**\n".format(member, " , ".join(roles))+ "\n"+member.display_name+" joined discord at : "+str(member.created_at)[:10]+"\nThey joined this server at : "+str(member.joined_at)[:10]+"\nCurrently playing : "+str(member.game)+"\nCurrent status : "+str(member.status)+"\n\n"+achievements+"\n\n**Balance :** " +dbhandler.whoisbalance(member).format(member), colour = 0xEE82EE)
 	embed.set_thumbnail(url = member.avatar_url)
 	embed.set_image(url = str(dbhandler.whoislevel(member)))
