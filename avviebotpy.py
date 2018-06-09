@@ -702,7 +702,6 @@ async def profile(ctx,*,member:discord.Member=None):
 	achieves = 0
 	if member == None:
  		member = ctx.message.author
-	roles = [role.name for role in member.roles[1:]]
 	if "chill bot developer" in [y.name.lower() for y in member.roles]:
 		achievements = achievements + "\n:dizzy:**Chill Bot Developer**:dizzy:"
 		achieves = achieves + 1
@@ -737,7 +736,7 @@ async def profile(ctx,*,member:discord.Member=None):
 		achievements = achievements + "\n:dart:2 Achievements:dart:"
 	if achieves >= 5:
 		achievements = achievements + "\n:medal:5 Achievements:medal:"
-	embed=discord.Embed(title = member.name , description= member.top_role+" is their highest role out of "+str(len(member.roles))+"\n"+member.display_name+" joined discord at : "+str(member.created_at)[:10]+"\nThey joined this server at : "+str(member.joined_at)[:10]+"\nCurrently playing : "+str(member.game)+"\nCurrent status : "+str(member.status)+"\n\n"+achievements+"\n\n**Balance :** " +dbhandler.whoisbalance(member).format(member), colour = 0xEE82EE)
+	embed=discord.Embed(title = member.name , description= member.top_role+" is their highest role out of "+len(member.roles)+"\n"+member.display_name+" joined discord at : "+str(member.created_at)[:10]+"\nThey joined this server at : "+str(member.joined_at)[:10]+"\nCurrently playing : "+str(member.game)+"\nCurrent status : "+str(member.status)+"\n\n"+achievements+"\n\n**Balance :** " +dbhandler.whoisbalance(member).format(member), colour = 0xEE82EE)
 	embed.set_thumbnail(url = member.avatar_url)
 	embed.set_image(url = str(dbhandler.whoislevel(member)))
 	await bot.say(embed=embed)
