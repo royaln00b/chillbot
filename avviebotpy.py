@@ -699,15 +699,41 @@ async def creator(ctx):
 @bot.command(pass_context=True)
 async def profile(ctx,*,member:discord.Member=None):
 	achievements = "Achievements :"
+	achieves = 0
 	if member == None:
  		member = ctx.message.author
 	roles = [role.name for role in member.roles[1:]]
 	if "baller" in [y.name.lower() for y in ctx.message.author.roles]:
 		achievements = achievements + "\n:moneybag:Baller:moneybag:"
+		achieves = achieves + 1
 	if "millionaire" in [y.name.lower() for y in ctx.message.author.roles]:
 		achievements = achievements + "\n:moneybag:Millionaire:moneybag:"
+		achieves = achieves + 1
 	if "informed" in [y.name.lower() for y in ctx.message.author.roles]:
 		achievements = achievements + "\n:books:Informed:books:"
+		achieves = achieves + 1
+	if "chill bot developer" in [y.name.lower() for y in ctx.message.author.roles]:
+		achievements = achievements + "\n:dizzy:Chill Bot Developer:dizzy:"
+		achieves = achieves + 1
+	if "server staff" in [y.name.lower() for y in ctx.message.author.roles]:
+		achievements = achievements + "\n:zap:Staff:zap:"
+		achieves = achieves + 1
+	if dbhandler.numblevel(member) >= 10:
+		achievements = achievements + "\n:performing_arts:Level 10:performing_arts:"
+		achieves = achieves + 1
+	if dbhandler.numblevel(member) >= 20:
+		achievements = achievements + "\n:rosette:Level 20:rosette:"
+		achieves = achieves + 1
+	if dbhandler.numblevel(member) >= 30:
+		achievements = achievements + "\n:trophy:Level 10 (2nd prestige):trophy:"
+		achieves = achieves + 1
+	if dbhandler.numblevel(member) >= 40:
+		achievements = achievements + "\n<:GWqlabsWhy:398950713742327810>Level 20 (2nd prestige)<:GWqlabsWhy:398950713742327810>"
+		achieves = achieves + 1
+	if achieves >= 2:
+		achievements = achievements + "\n:dart:2 Achievements:dart:"
+	if achieves >= 5:
+		achievements = achievements + "\n:medal:5 Achievements:medal:"
 	embed=discord.Embed(title = member.name , description="\n {0.display_name} has the role(s) of :\n**{1}**\n".format(member, " , ".join(roles))+ "\n"+member.display_name+" joined discord at : "+str(member.created_at)[:10]+"\nThey joined this server at : "+str(member.joined_at)[:10]+"\nCurrently playing : "+str(member.game)+"\nCurrent status : "+str(member.status)+"\n\n"+achievements+"\n\n**Balance :** " +dbhandler.whoisbalance(member).format(member), colour = 0xEE82EE)
 	embed.set_thumbnail(url = member.avatar_url)
 	embed.set_image(url = str(dbhandler.whoislevel(member)))
