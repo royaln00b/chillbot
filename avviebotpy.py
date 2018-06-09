@@ -704,9 +704,9 @@ async def profile(ctx,*,member:discord.Member=None):
 	roles = [role.name for role in member.roles[1:]]
 	if "baller" in [y.name.lower() for y in ctx.message.author.roles]:
 		achievements = achievements + "\n:moneybag:Baller:moneybag:"
-	elif "millionaire" in [y.name.lower() for y in ctx.message.author.roles]:
+	if "millionaire" in [y.name.lower() for y in ctx.message.author.roles]:
 		achievements = achievements + "\n:moneybag:Millionaire:moneybag:"
-	elif "informed" in [y.name.lower() for y in ctx.message.author.roles]:
+	if "informed" in [y.name.lower() for y in ctx.message.author.roles]:
 		achievements = achievements + "\n:books:Informed:books:"
 	embed=discord.Embed(title = member.name , description="\n {0.display_name} has the role(s) of :\n**{1}**\n".format(member, " , ".join(roles))+ "\n"+member.display_name+" joined discord at : "+str(member.created_at)[:10]+"\nThey joined this server at : "+str(member.joined_at)[:10]+"\nCurrently playing : "+str(member.game)+"\nCurrent status : "+str(member.status)+"\n\n"+achievements+"\n\n**Balance :** " +dbhandler.whoisbalance(member).format(member), colour = 0xEE82EE)
 	embed.set_thumbnail(url = member.avatar_url)
