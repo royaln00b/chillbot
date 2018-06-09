@@ -830,6 +830,18 @@ def buy(ctx,item):
 			c.execute('UPDATE avviebot SET balance = balance - 5000 WHERE userid = %s', (ctx.message.author.id,))
 			return True
 		
+def checkbal(message):
+	c.execute('SELECT balance FROM avviebot WHERE userid=  %s', (message.author.id,))
+	data = c.fetchone()
+	if data is None:
+		data4 = "None? How did you even manage this?"
+	else:
+		data = str(data)
+		data1 = data.replace("(","")
+		data2 = data1.replace(")","")
+		data3 = data2.replace(",","")
+	return data3
+
 
 def randomdrop(message):
 	c.execute('UPDATE avviebot SET balance = balance + 100 WHERE userid = %s',  (message.author.id,))
