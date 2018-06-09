@@ -313,7 +313,7 @@ keyz = "q"
 async def help(ctx,*,command=None):
     if not "informed" in [y.name.lower() for y in ctx.message.author.roles]:
         await bot.add_roles(ctx.message.author,discord.utils.get(ctx.message.server.roles, name="Informed"))
-        embed = discord.Embed(title="Achievement! | "+message.author.display_name,description=message.author.display_name+" earnt the achievement :books:Informed:books: !",colour=0xEE82EE)
+        embed = discord.Embed(title="Achievement! | "+ctx.message.author.display_name,description=message.author.display_name+" earnt the achievement :books:Informed:books: !",colour=0xEE82EE)
         await bot.say(ctx.message.channel,embed=embed)
     if command == None:
         await bot.add_reaction(message = ctx.message, emoji = "✅")
