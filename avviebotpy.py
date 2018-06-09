@@ -703,6 +703,9 @@ async def profile(ctx,*,member:discord.Member=None):
 	if member == None:
  		member = ctx.message.author
 	roles = [role.name for role in member.roles[1:]]
+	if "chill bot developer" in [y.name.lower() for y in member.roles]:
+		achievements = achievements + "\n:dizzy:**Chill Bot Developer**:dizzy:"
+		achieves = achieves + 1
 	if "baller" in [y.name.lower() for y in member.roles]:
 		achievements = achievements + "\n:moneybag:Baller:moneybag:"
 		achieves = achieves + 1
@@ -711,9 +714,6 @@ async def profile(ctx,*,member:discord.Member=None):
 		achieves = achieves + 1
 	if "informed" in [y.name.lower() for y in ctx.message.author.roles]:
 		achievements = achievements + "\n:books:Informed:books:"
-		achieves = achieves + 1
-	if "chill bot developer" in [y.name.lower() for y in member.roles]:
-		achievements = achievements + "\n:dizzy:Chill Bot Developer:dizzy:"
 		achieves = achieves + 1
 	if "server staff" in [y.name.lower() for y in member.roles]:
 		achievements = achievements + "\n:zap:Staff:zap:"
