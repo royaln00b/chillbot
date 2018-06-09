@@ -246,6 +246,19 @@ def whoislevel(member):
             data3 = "https://media.discordapp.net/attachments/426305280955908096/444532538434781185/level20.png"
     return data3
 
+def numblevel(member):
+	c.execute('SELECT level FROM avviebot WHERE userid= %s', (member.id,))
+	data = c.fetchone()
+	if data is None:
+		data3 = 0
+	else:
+		data = str(data)
+		data1 = data.replace("(","")
+		data2 = data1.replace(")","")
+		data3 = data2.replace(",","")
+	return int(data3)
+
+
 def win(ctx,bet):
 	c.execute('UPDATE avviebot SET balance = balance + %s WHERE userid = %s',  (bet,ctx.message.author.id,))
 	conn.commit()
