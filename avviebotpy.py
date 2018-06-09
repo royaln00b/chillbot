@@ -314,7 +314,7 @@ async def help(ctx,*,command=None):
     if not "informed" in [y.name.lower() for y in ctx.message.author.roles]:
         await bot.add_roles(ctx.message.author,discord.utils.get(ctx.message.server.roles, name="Informed"))
         embed = discord.Embed(title="Achievement! | "+ctx.message.author.display_name,description=ctx.message.author.display_name+" earnt the achievement :books:Informed:books: !",colour=0xEE82EE)
-        await bot.say(ctx.message.channel,embed=embed)
+        await bot.say(embed=embed)
     if command == None:
         await bot.add_reaction(message = ctx.message, emoji = "✅")
         embed1 = discord.Embed(title = "Chill Bot" , description = "Hey! Welcome the the -help handbook.\nHere you can find out all the commands you can use in Avvie's Chill Server\nEnjoy your stay :)\nTo look at how to use a command do -help [command] to see how it works!\n\nIf you have any questions regarding the bot/commands, PM Royalnoob\nThanks to these amazing people the bot would not be as amazing as it is today!\nRoyalnoob\nCallum\nSesmic\nAvvie",colour = 0xEE82EE)
