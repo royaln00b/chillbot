@@ -691,11 +691,10 @@ async def creator(ctx):
         await bot.say("Hmmmm, you're not Royal -_-")
 
 
-achievements = "Achievements :"
-baller = ""
-millionaire = ""
+
 @bot.command(pass_context=True)
 async def profile(ctx,*,member:discord.Member=None):
+	achievements = "Achievements :"
 	if member == None:
  		member = ctx.message.author
 	roles = [role.name for role in member.roles[1:]]
