@@ -224,10 +224,14 @@ async def prestige(ctx):
 async def setlevel(member:discord.Member,amount):
     dbhandler.setlevel(member,amount)
        
-@commands.has_role("Management")
-@bot.command()
-async def setmoney(member:discord.Member,amount):
-    await bot.say(dbhandler.setmoney(member,amount))
+
+@bot.command(pass_context=True)
+async def setmoney(ctx,member:discord.Member,amount):
+	if "management" in [y.name.lower() for y in ctx.message.author.roles]:
+		dbhandler.setmoney(member,amount)
+		await bot.add_reaction(message = ctx.message, emoji = "✅")
+	else:
+		await bot.add_reaction(message = ctx.message, emoji = "🚫")
        
 @bot.command(pass_context=True)
 async def donate(ctx,member:discord.Member,amount):
