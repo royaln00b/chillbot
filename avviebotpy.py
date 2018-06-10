@@ -276,7 +276,7 @@ async def balance(ctx,*,member:discord.Member=None):
 	dbhandler.add_me(ctx)
 	embed=discord.Embed(title="Balance | "+member.display_name,description="**"+str(dbhandler.whoisbalance(member))+"\nNice**!",colour=0xEE82EE)
 	embed.set_thumbnail(url = member.avatar_url)
-	embed.set_footer(*, text="Requested by :"+ctx.message.author.display_name, icon_url=ctx.message.author.avatar_url)
+	embed.set_footer(text="Requested by :"+ctx.message.author.display_name, icon_url=ctx.message.author.avatar_url)
 	await bot.say(embed=embed)
         
 @bot.command(pass_context=True, aliases=["l"])
