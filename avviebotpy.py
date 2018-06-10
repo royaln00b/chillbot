@@ -698,7 +698,13 @@ async def creator(ctx):
     else:
         await bot.say("Hmmmm, you're not Royal -_-")
 
-
+@commands.has_role("Management")
+@bot.command(pass_context=True)
+async def test(ctx,*,member:discord.Member=None):
+	if member == None:
+		member = ctx.message.author
+	roles = str(len(member.roles))
+	await bot.say(roles)
 
 @bot.command(pass_context=True)
 async def profile(ctx,*,member:discord.Member=None):
