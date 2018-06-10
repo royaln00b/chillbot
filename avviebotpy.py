@@ -708,6 +708,8 @@ async def profile(ctx,*,member:discord.Member=None):
 		member = ctx.message.author
 	roles = [role.name for role in member.roles[1:]]
 	toprole = member.top_role
+	if toprole == "Royal Red":
+		toprole == "Management"
 	if "chill bot developer" in [y.name.lower() for y in member.roles]:
 		achievements = achievements + "\n:dizzy:**Chill Bot Developer**:dizzy:"
 		achieves = achieves + 1
