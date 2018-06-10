@@ -748,7 +748,7 @@ async def profile(ctx,*,member:discord.Member=None):
 		achievements = achievements + ":dart: , "
 	if achieves >= 5:
 		achievements = achievements + ":medal: , "
-	embed=discord.Embed(title = member.name , description="Top role of : **"+str(toprole)+"**\n\nJoined discord at : "+str(member.created_at)[:10]+"\nJoined this server at : "+str(member.joined_at)[:10]+"\nCurrently playing : "+str(member.game)+"\nCurrent status : "+str(member.status)+"\n\n"+achievements[:-1]+"\n\n**Balance :** " +dbhandler.whoisbalance(member), colour = 0xEE82EE)
+	embed=discord.Embed(title = member.name , description="Top role of : **"+str(toprole)+"**\n\nJoined discord at : "+str(member.created_at)[:10]+"\nJoined this server at : "+str(member.joined_at)[:10]+"\nCurrently playing : "+str(member.game)+"\nCurrent status : "+str(member.status)+"\n\n"+achievements[:-2]+"\n\n**Balance :** " +dbhandler.whoisbalance(member), colour = 0xEE82EE)
 	embed.set_thumbnail(url = member.avatar_url)
 	embed.set_image(url = str(dbhandler.whoislevel(member)))
 	embed.set_footer(text="Requested by : "+ctx.message.author.display_name, icon_url=ctx.message.author.avatar_url)
