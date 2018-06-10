@@ -50,7 +50,7 @@ def getdaily(ctx):
 	data2 = data1.replace(")","")
 	data3 = data2.replace(",","")
 	data4 = int(data3) - int(time.time())
-	floated = str(datetime.datetime.utcfromtimestamp(int(data4)).strftime("%H:%M:%S"))
+	floated = str(datetime.datetime.utcfromtimestamp(int(data4)).strftime("%H Hours %M Minutes %S Seconds"))
 	return floated
 	
 
