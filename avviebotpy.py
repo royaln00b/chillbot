@@ -698,11 +698,16 @@ async def creator(ctx):
     else:
         await bot.say("Hmmmm, you're not Royal -_-")
 
+@bot.command(pass_context=True,aliases=["a","ach"])
+async def achievements(ctx):
+	embed=discord.Embed(title="Achievements",description="1. :dizzy: - Chill Bot Developer\n2. :zap: - Server Staff\n3. :books: - Informed\n4. :dollar: - Reach 10k<:Coin:439199818447978508>\n5. :money_with_wings: - Reach 500k<:Coin:439199818447978508>\n6. :moneybag: - Reach 1m<:Coin:439199818447978508>\n7. :performing_arts: - Reach Level 10 (First prestige)\n8. :rosette: - Reach Level 20 (First Prestige)\n9. :trophy: - Reach Level 10 (Second Prestige)\n10. :reminder_ribbon: - Reach Level 20 (Second Prestige)\n11. :dart: - 2 achievements\n12. :medal: - 5 achievements",colour=0xEE82EE)
+	await bot.send_message(ctx.message.author,embed=embed)
+
 #roles = [role.name for role in member.roles[1:]] - Use for later reference. (Shows all roles)
 
 @bot.command(pass_context=True)
 async def profile(ctx,*,member:discord.Member=None):
-	achievements = "Achievements :"
+	achievements = "Achievements :\n"
 	achieves = 0
 	if member == None:
 		member = ctx.message.author
@@ -710,40 +715,40 @@ async def profile(ctx,*,member:discord.Member=None):
 	if str(toprole) == "Royal Red":
 		toprole = "Management"
 	if "chill bot developer" in [y.name.lower() for y in member.roles]:
-		achievements = achievements + "\n:dizzy:**Chill Bot Developer**:dizzy:"
-		achieves = achieves + 1
-	if "rich" in [y.name.lower() for y in member.roles]:
-		achievements = achievements + "\n:dollar:Rich:dollar:"
-		achieves = achieves + 1
-	if "baller" in [y.name.lower() for y in member.roles]:
-		achievements = achievements + "\n:moneybag:Baller:moneybag:"
-		achieves = achieves + 1
-	if "millionaire" in [y.name.lower() for y in member.roles]:
-		achievements = achievements + "\n:moneybag:Millionaire:moneybag:"
-		achieves = achieves + 1
-	if "informed" in [y.name.lower() for y in ctx.message.author.roles]:
-		achievements = achievements + "\n:books:Informed:books:"
+		achievements = achievements + ":dizzy: , "
 		achieves = achieves + 1
 	if "server staff" in [y.name.lower() for y in member.roles]:
-		achievements = achievements + "\n:zap:Staff:zap:"
+		achievements = achievements + ":zap: , "
+		achieves = achieves + 1
+	if "informed" in [y.name.lower() for y in ctx.message.author.roles]:
+		achievements = achievements + ":books: , "
+		achieves = achieves + 1
+	if "rich" in [y.name.lower() for y in member.roles]:
+		achievements = achievements + ":dollar: , "
+		achieves = achieves + 1
+	if "baller" in [y.name.lower() for y in member.roles]:
+		achievements = achievements + ":money_with_wings: ,"
+		achieves = achieves + 1
+	if "millionaire" in [y.name.lower() for y in member.roles]:
+		achievements = achievements + ":moneybag: , "
 		achieves = achieves + 1
 	if dbhandler.numblevel(member) >= 10:
-		achievements = achievements + "\n:performing_arts:Level 10:performing_arts:"
+		achievements = achievements + ":performing_arts: , "
 		achieves = achieves + 1
 	if dbhandler.numblevel(member) >= 20:
-		achievements = achievements + "\n:rosette:Level 20:rosette:"
+		achievements = achievements + ":rosette: , "
 		achieves = achieves + 1
 	if dbhandler.numblevel(member) >= 30:
-		achievements = achievements + "\n:trophy:Level 10 (2nd prestige):trophy:"
+		achievements = achievements + ":trophy: , "
 		achieves = achieves + 1
 	if dbhandler.numblevel(member) >= 40:
-		achievements = achievements + "\n:reminder_ribbon:Level 20 (2nd prestige):reminder_ribbon:"
+		achievements = achievements + ":reminder_ribbon: , "
 		achieves = achieves + 1
 	if achieves >= 2:
-		achievements = achievements + "\n:dart:2 Achievements:dart:"
+		achievements = achievements + ":dart: , "
 	if achieves >= 5:
-		achievements = achievements + "\n:medal:5 Achievements:medal:"
-	embed=discord.Embed(title = member.name , description="Top role of : **"+str(toprole)+"**\n\nJoined discord at : "+str(member.created_at)[:10]+"\nJoined this server at : "+str(member.joined_at)[:10]+"\nCurrently playing : "+str(member.game)+"\nCurrent status : "+str(member.status)+"\n\n"+achievements+"\n\n**Balance :** " +dbhandler.whoisbalance(member), colour = 0xEE82EE)
+		achievements = achievements + ":medal: , "
+	embed=discord.Embed(title = member.name , description="Top role of : **"+str(toprole)+"**\n\nJoined discord at : "+str(member.created_at)[:10]+"\nJoined this server at : "+str(member.joined_at)[:10]+"\nCurrently playing : "+str(member.game)+"\nCurrent status : "+str(member.status)+"\n\n"+achievements[:-1]+"\n\n**Balance :** " +dbhandler.whoisbalance(member), colour = 0xEE82EE)
 	embed.set_thumbnail(url = member.avatar_url)
 	embed.set_image(url = str(dbhandler.whoislevel(member)))
 	embed.set_footer(text="Requested by : "+ctx.message.author.display_name, icon_url=ctx.message.author.avatar_url)
