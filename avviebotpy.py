@@ -700,6 +700,7 @@ async def creator(ctx):
 
 @bot.command(pass_context=True,aliases=["a","ach"])
 async def achievements(ctx):
+	await bot.add_reaction(message = ctx.message, emoji = "✅")
 	embed=discord.Embed(title="Achievements",description="1. :dizzy: - Chill Bot Developer\n2. :zap: - Server Staff\n3. :books: - Informed\n4. :dollar: - Reach 10k<:Coin:439199818447978508>\n5. :money_with_wings: - Reach 500k<:Coin:439199818447978508>\n6. :moneybag: - Reach 1m<:Coin:439199818447978508>\n7. :performing_arts: - Reach Level 10 (First prestige)\n8. :rosette: - Reach Level 20 (First Prestige)\n9. :trophy: - Reach Level 10 (Second Prestige)\n10. :reminder_ribbon: - Reach Level 20 (Second Prestige)\n11. :dart: - 2 achievements\n12. :medal: - 5 achievements",colour=0xEE82EE)
 	await bot.send_message(ctx.message.author,embed=embed)
 
