@@ -270,11 +270,14 @@ async def level(ctx):
     await bot.send_message(ctx.message.channel,embed=embed)
        
 @bot.command(pass_context=True, aliases=["b"])
-async def balance(ctx):
-    dbhandler.add_me(ctx)
-    embed=discord.Embed(title="Balance | "+ctx.message.author.display_name,description="**"+str(dbhandler.balance(ctx))+"\nNice**!",colour=0xEE82EE)
-    embed.set_thumbnail(url = ctx.message.author.avatar_url)
-    await bot.say(embed=embed)
+async def balance(ctx,*,member:discord.Member=None):
+	if member == None:
+		member = ctx.message.author
+	dbhandler.add_me(ctx)
+	embed=discord.Embed(title="Balance | "+member.display_name,description="**"+str(dbhandler.whoisbalance(member))+"\nNice**!",colour=0xEE82EE)
+	embed.set_thumbnail(url = member.avatar_url)
+	embed.set_footer(*, text="Requested by :"+ctx.message.author.display_name, icon_url=ctx.message.author.avatar_url)
+	await bot.say(embed=embed)
         
 @bot.command(pass_context=True, aliases=["l"])
 async def leaderboard(ctx):
