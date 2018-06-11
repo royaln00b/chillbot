@@ -39,7 +39,7 @@ def addonmessagenames(message):
 	rows = c.fetchall()
 	string = '\n'.join(str(row) for row in rows)
 	if not str(message.author.id) in string:
-		c.execute("INSERT INTO names VALUES(%s,%s,%s,%s,%s,%s)",(message.author.id,message.author.display_name,"None","None","None"))
+		c.execute("INSERT INTO names VALUES(%s,%s,%s,%s,%s,%s)",(message.author.id,message.author.display_name,"None","None","None","None"))
 		conn.commit()
 
 def everyonenames():
