@@ -1103,11 +1103,11 @@ _69=[""]
 @bot.command(name="69",pass_context=True)
 async def __69(ctx):
 	if ctx.message.channel.id == "414641280610598922":
-    chars = '0123456789ABCDEF'
-    mentions = [member.display_name for member in ctx.message.mentions]
-    embed=discord.Embed(title=str(ctx.message.author.name) + " has 69 with " + ' and '.join(mentions) , description=None , color = discord.Colour(int('0x'+''.join(sample(chars,6)),16)))
-    embed.set_image(url = random.choice(_69))
-    await bot.say(embed=embed)
+		chars = '0123456789ABCDEF'
+		mentions = [member.display_name for member in ctx.message.mentions]
+		embed=discord.Embed(title=str(ctx.message.author.name) + " has 69 with " + ' and '.join(mentions) , description=None , color = discord.Colour(int('0x'+''.join(sample(chars,6)),16)))
+		embed.set_image(url = random.choice(_69))
+		await bot.say(embed=embed)
 	else:
 		await bot.add_reaction(message = ctx.message, emoji = "🚫")
 
