@@ -771,6 +771,14 @@ async def profile(ctx,*,member:discord.Member=None):
 	embed.set_footer(text="Requested by : "+ctx.message.author.display_name, icon_url=ctx.message.author.avatar_url)
 	await bot.say(embed=embed)
        
+@bot.command(pass_context=True)
+async def avatar(ctx,*,member:discord.Member=None):
+	if member == None:
+		member = ctx.message.author
+	embed=discord.Embed(title="Avatar of "+member.display_name,description=None,colour=0xEE82EE)
+	embed.set_image(url = member.avatar_url)
+	await bot.send_message(ctx.channel,embed=embed)
+
 @commands.has_role("Rainbow")
 @bot.command(pass_context=True)
 async def color(ctx):
