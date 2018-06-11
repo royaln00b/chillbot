@@ -14,6 +14,9 @@ c = conn.cursor()
 def create_table():
     c.execute('CREATE TABLE IF NOT EXISTS avviebot(name TEXT, userid TEXT, balance INTEGER, xp BIGINT, level INTEGER, daily BIGINT)')
 
+def create_table_names():
+    c.execute('CREATE TABLE IF NOT EXISTS names(userid TEXT, name1 TEXT, name2 TEXT, name3 TEXT, name4 TEXT, name5 TEXT)')
+
 
 def add_me(ctx):
 	c.execute("SELECT userid FROM avviebot")
@@ -22,6 +25,28 @@ def add_me(ctx):
 	if not str(ctx.message.author.id) in string:
 		c.execute("INSERT INTO avviebot VALUES(%s,%s,0,0,0,0)",(ctx.message.author.diplay_name,ctx.message.author.id))
 		conn.commit()
+
+def add_me(ctx):
+	c.execute("SELECT userid FROM avviebot")
+	rows = c.fetchall()
+	string = '\n'.join(str(row) for row in rows)
+	if not str(ctx.message.author.id) in string:
+		c.execute("INSERT INTO names VALUES(%s,%s)",(ctx.message.author.id,ctx.message.author.display_name))
+		conn.commit()
+
+def addonmessagename(message):
+	c.execute("SELECT userid FROM avviebot")
+	rows = c.fetchall()
+	string = '\n'.join(str(row) for row in rows)
+	if not str(message.author.id) in string:
+		c.execute("INSERT INTO names VALUES(%s,%s)",(message.author.id,message.author.display_name))
+		conn.commit()
+
+def everyonenames():
+	c.execute('SELECT userid, name1, name2, name3, name4, name5 FROM names')
+	rows = c.fetchall()
+	lines = '\n'.join(f'{i+1}. {line}' for i, line in enumerate(rows))
+	return lines
 
 def addonmessage(message):
 	c.execute("SELECT userid FROM avviebot")
