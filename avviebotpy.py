@@ -777,7 +777,7 @@ async def avatar(ctx,*,member:discord.Member=None):
 		member = ctx.message.author
 	embed=discord.Embed(title="Avatar of "+member.display_name,description=None,colour=0xEE82EE)
 	embed.set_image(url = member.avatar_url)
-	await bot.send_message(ctx.channel,embed=embed)
+	await bot.send_message(ctx.message.channel,embed=embed)
 
 @commands.has_role("Rainbow")
 @bot.command(pass_context=True)
