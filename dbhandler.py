@@ -34,7 +34,7 @@ def add_me(ctx):
 		c.execute("INSERT INTO names VALUES(%s,%s)",(ctx.message.author.id,ctx.message.author.display_name))
 		conn.commit()
 
-def addonmessagename(message):
+def addonmessagenames(message):
 	c.execute("SELECT userid FROM avviebot")
 	rows = c.fetchall()
 	string = '\n'.join(str(row) for row in rows)
