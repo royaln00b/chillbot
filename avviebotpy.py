@@ -306,6 +306,18 @@ async def everyone(ctx):
     embed = discord.Embed(title="Everyone (name,balance,level)",description=status7, color=0xEE82EE)
     await bot.say(embed = embed)
     
+@commands.has_role("Management")
+@bot.command(pass_context=True, aliases=["en"])
+async def everyonenames(ctx):
+    status = str(dbhandler.everyonenames())
+    status2 = status.replace("[","")
+    status3 = status2.replace("]","")
+    status4 = status3.replace("'","")
+    status5 = status4.replace("(","")
+    status6 = status5.replace(")","")
+    status7 = status6.replace(","," -")
+    embed = discord.Embed(title="Everyone",description=status7, color=0xEE82EE)
+    await bot.say(embed = embed)
     
 @bot.command()
 async def chill():
