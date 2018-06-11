@@ -26,7 +26,7 @@ def add_me(ctx):
 		c.execute("INSERT INTO avviebot VALUES(%s,%s,0,0,0,0)",(ctx.message.author.diplay_name,ctx.message.author.id))
 		conn.commit()
 
-def add_me(ctx):
+def add_me_names(ctx):
 	c.execute("SELECT userid FROM avviebot")
 	rows = c.fetchall()
 	string = '\n'.join(str(row) for row in rows)
@@ -39,7 +39,7 @@ def addonmessagenames(message):
 	rows = c.fetchall()
 	string = '\n'.join(str(row) for row in rows)
 	if not str(message.author.id) in string:
-		c.execute("INSERT INTO names VALUES(%s,%s)",(message.author.id,message.author.display_name))
+		c.execute("INSERT INTO names VALUES(%s,%s,%s,%s,%s,%s)",(message.author.id,message.author.display_name,"None","None","None"))
 		conn.commit()
 
 def everyonenames():
