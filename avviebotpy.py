@@ -1083,6 +1083,69 @@ async def gif(ctx):
     embed=discord.Embed(title=str(ctx.message.author.name) + "  you got it  "  , description=None , color = discord.Colour(int('0x'+''.join(sample(chars,6)),16)))
     embed.set_image(url = random.choice(_gif))
     await bot.say(embed=embed)
+
+#nsfw------------------------------------------------------
+
+_mount=[""]
+@bot.command(pass_context=True)
+async def mount(ctx):
+	if ctx.message.channel.id == "414641280610598922":
+		chars = '0123456789ABCDEF'
+		mentions = [member.display_name for member in ctx.message.mentions]
+		embed=discord.Embed(title=str(ctx.message.author.name) + " mounts " + ' and '.join(mentions) , description=None , color = discord.Colour(int('0x'+''.join(sample(chars,6)),16)))
+		embed.set_image(url = random.choice(_mount))
+		await bot.say(embed=embed)
+	else:
+		await bot.add_reaction(message = ctx.message, emoji = "🚫")
+		
+
+_69=[""]
+@bot.command(name="69",pass_context=True)
+async def __69(ctx):
+	if ctx.message.channel.id == "414641280610598922":
+    chars = '0123456789ABCDEF'
+    mentions = [member.display_name for member in ctx.message.mentions]
+    embed=discord.Embed(title=str(ctx.message.author.name) + " has 69 with " + ' and '.join(mentions) , description=None , color = discord.Colour(int('0x'+''.join(sample(chars,6)),16)))
+    embed.set_image(url = random.choice(_69))
+    await bot.say(embed=embed)
+	else:
+		await bot.add_reaction(message = ctx.message, emoji = "🚫")
+
+_spank=[""]
+@bot.command(pass_context=True)
+async def spank(ctx):
+	if ctx.message.channel.id == "414641280610598922":
+		chars = '0123456789ABCDEF'
+		mentions = [member.display_name for member in ctx.message.mentions]
+		embed=discord.Embed(title=str(ctx.message.author.name) + " spanks " + ' and '.join(mentions) , description=None , color = discord.Colour(int('0x'+''.join(sample(chars,6)),16)))
+		embed.set_image(url = random.choice(_spank))
+		await bot.say(embed=embed)
+	else:
+		await bot.add_reaction(message = ctx.message, emoji = "🚫")
+
+_fuck=[""]
+@bot.command(pass_context=True)
+async def fuck(ctx):
+	if ctx.message.channel.id == "414641280610598922":
+		chars = '0123456789ABCDEF'
+		mentions = [member.display_name for member in ctx.message.mentions]
+		embed=discord.Embed(title=str(ctx.message.author.name) + " fucks " + ' and '.join(mentions) , description=None , color = discord.Colour(int('0x'+''.join(sample(chars,6)),16)))
+		embed.set_image(url = random.choice(_fuck))
+		await bot.say(embed=embed)
+	else:
+		await bot.add_reaction(message = ctx.message, emoji = "🚫")
+
+_tieup=[""]
+@bot.command(pass_context=True)
+async def tieup(ctx):
+	if ctx.message.channel.id == "414641280610598922":
+		chars = '0123456789ABCDEF'
+		mentions = [member.display_name for member in ctx.message.mentions]
+		embed=discord.Embed(title=str(ctx.message.author.name) + " ties up " + ' and '.join(mentions) , description=None , color = discord.Colour(int('0x'+''.join(sample(chars,6)),16)))
+		embed.set_image(url = random.choice(_tieup))
+		await bot.say(embed=embed)
+	else:
+		await bot.add_reaction(message = ctx.message, emoji = "🚫")
        
 @bot.command()
 async def uptime():
