@@ -34,6 +34,13 @@ async def avatar(ctx,*,member:discord.Member=None):
 	embed.set_footer(text="Requested by : "+ctx.message.author.display_name, icon_url=ctx.message.author.avatar_url)
 	await bot.send_message(ctx.message.channel,embed=embed)
 
+# Display settings
+@bot.command(pass_context=True)
+async def settings(ctx,*,setting=None):
+	if setting == None:
+		embed=discord.Embed(title="Server Settings",description=str(dbhandler.display()),colour=0xFFC600)
+		await bot.send_message(ctx.message.channel,embed=embed)
+
 
 #			Events
 
