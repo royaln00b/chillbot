@@ -51,7 +51,7 @@ async def settings(ctx,*,setting=None):
 # Mute command
 @bot.command(pass_context=True)
 async def mute(ctx,member:discord.Member):
-	if "muted" in [y.name.lower() for y in ctx.message.server.roles]:
+	if "Muted" in [y.name for y in ctx.message.server.roles]:
     		await bot.say('<@{}>, you have been muted'.format(member.id))
     		await asyncio.sleep(1)
     		await bot.add_roles(member,discord.utils.get(ctx.message.server.roles, name="Muted"))
