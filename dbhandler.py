@@ -15,7 +15,7 @@ def create_table():
 	c.execute('CREATE TABLE IF NOT EXISTS settings(setting TEXT, status TEXT)')
 
 def defaults():
-	c.execute("INSERT INTO settings VALUES(moderation,off)")
+	c.execute("INSERT INTO settings VALUES('moderation','off')")
 
 """
 def create_table():
