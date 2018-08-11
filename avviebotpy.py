@@ -48,16 +48,20 @@ async def settings(ctx,*,setting=None):
 		await bot.send_message(ctx.message.channel,embed=embed)
 
 #			Moderation Commands
-
+# Mute command
 @bot.command(pass_context=True)
 async def mute(ctx,member:discord.Member):
-	if "muted" in [y.name.lower() for y in ctx.server.roles]:
+	if "muted" in [y.name.lower() for y in ctx.message.server.roles]:
     		await bot.say('<@{}>, you have been muted'.format(member.id))
     		await asyncio.sleep(1)
     		await bot.add_roles(member,discord.utils.get(ctx.message.server.roles, name="Muted"))
 	else:
 		embed=discord.Embed(title="❕ OOPS ❕",description=ctx.message.author.mention+"\nIt appears the role `Muted` is not in this server, create it to mute someone!")
 		await bot.say(embed=embed)
+
+@bot.command(pass_context=True)
+async def purge(ctx,num: int):
+    await bot.purge_from(ctx.message.channel,limit=num)
 
 
 #			Events
