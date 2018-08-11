@@ -50,7 +50,7 @@ async def settings(ctx,*,setting=None):
 #			Moderation Commands
 # Mute command
 @bot.command(pass_context=True)
-async def mute(ctx,member:discord.Member,*,reason=None):
+async def mute(ctx,member:discord.Member,*,reason="None"):
 	if ctx.message.author.server_permissions.manage_messages == True:
 		if "Muted" in [y.name for y in ctx.message.server.roles]:
     			await bot.say('<@{}>, you have been muted. \nReason : ```'.format(member.id)+reason+'```')
@@ -65,7 +65,7 @@ async def mute(ctx,member:discord.Member,*,reason=None):
 
 # Kick command
 @bot.command(pass_context=True)
-async def kick(ctx,member:discord.Member,*,reason=None):
+async def kick(ctx,member:discord.Member,*,reason="None"):
 	if ctx.message.author.server_permissions.kick_members == True:
 		await bot.kick(member)
 		embed=discord.Embed(title="⚒️ KICKED ⚒️",description=member.display_name+" has been kicked by "+ctx.message.author.display_name+"\nReason : ```"+str(reason)+"```",colour=0xFFC600)
@@ -75,7 +75,7 @@ async def kick(ctx,member:discord.Member,*,reason=None):
 		await bot.say(embed=embed)
 # Ban command
 @bot.command(pass_context=True)
-async def ban(ctx,member:discord.Member,*,reason=None):
+async def ban(ctx,member:discord.Member,*,reason="None"):
 	if ctx.message.author.server_permissions.ban_members == True:
 		await bot.ban(member)
 		embed=discord.Embed(title="⚒️ BANNED ⚒️",description=member.display_name+" has been banned by "+ctx.message.author.display_name+"\nReason : ```"+str(reason)+"```",colour=0xFFC600)
