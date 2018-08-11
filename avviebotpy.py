@@ -38,7 +38,13 @@ async def avatar(ctx,*,member:discord.Member=None):
 @bot.command(pass_context=True)
 async def settings(ctx,*,setting=None):
 	if setting == None:
-		embed=discord.Embed(title="Server Settings",description=str(dbhandler.display()),colour=0xFFC600)
+		status = str(dbhandler.display())
+		status = status.replace("'","")
+		status = status.replace("(","")
+		status = status.replace(")","")
+		status = status.replace(","," -")
+
+		embed=discord.Embed(title="Server Settings",description=status,colour=0xFFC600)
 		await bot.send_message(ctx.message.channel,embed=embed)
 
 
