@@ -73,6 +73,16 @@ async def kick(ctx,member:discord.Member):
 	else:
 		embed=discord.Embed(title="❕ Permission Error ❕",description=ctx.message.author.mention+"\nIt appears that you do not have the permission to Kick Members, which is required to kick someone!",colour=0xFFC600)
 		await bot.say(embed=embed)
+# Ban command
+@bot.command(pass_context=True)
+async def ban(ctx,member:discord.Member):
+	if ctx.message.author.server_permissions.ban_members == True:
+		await bot.ban(member)
+		embed=discord.Embed(title="⚒️ BANNED ⚒️",description=member.display_name+" has been banned by "+ctx.message.author.display_name,colour=0xFFC600)
+		await bot.say(embed=embed)
+	else:
+		embed=discord.Embed(title="❕ Permission Error ❕",description=ctx.message.author.mention+"\nIt appears that you do not have the permission to ban Members, which is required to ban someone!",colour=0xFFC600)
+		await bot.say(embed=embed)
 
 # Purge command
 @bot.command(pass_context=True)
