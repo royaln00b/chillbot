@@ -51,12 +51,16 @@ async def settings(ctx,*,setting=None):
 # Mute command
 @bot.command(pass_context=True)
 async def mute(ctx,member:discord.Member):
-	if "Muted" in [y.name for y in ctx.message.server.roles]:
-    		await bot.say('<@{}>, you have been muted'.format(member.id))
-    		await asyncio.sleep(1)
-    		await bot.add_roles(member,discord.utils.get(ctx.message.server.roles, name="Muted"))
+	if ctx.message.author.Permissions.manage_messages == True:
+		if "Muted" in [y.name for y in ctx.message.server.roles]:
+    			await bot.say('<@{}>, you have been muted'.format(member.id))
+    			await asyncio.sleep(1)
+    			await bot.add_roles(member,discord.utils.get(ctx.message.server.roles, name="Muted"))
+		else:
+			embed=discord.Embed(title="❕ OOPS ❕",description=ctx.message.author.mention+"\nIt appears the role `Muted` is not in this server, create it to mute someone!",colour=0xFFC600)
+			await bot.say(embed=embed)
 	else:
-		embed=discord.Embed(title="❕ OOPS ❕",description=ctx.message.author.mention+"\nIt appears the role `Muted` is not in this server, create it to mute someone!")
+		embed=discord.Embed(title="❕ Permission Error ❕",description=ctx.message.author.mention+"\nIt appears that you do not have the permission to Manage Messages, which is required to mute someone!",colour=0xFFC600)
 		await bot.say(embed=embed)
 
 @bot.command(pass_context=True)
