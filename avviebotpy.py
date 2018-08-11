@@ -63,6 +63,18 @@ async def mute(ctx,member:discord.Member):
 		embed=discord.Embed(title="❕ Permission Error ❕",description=ctx.message.author.mention+"\nIt appears that you do not have the permission to Manage Messages, which is required to mute someone!",colour=0xFFC600)
 		await bot.say(embed=embed)
 
+# Kick command
+@bot.command(pass_context=True)
+async def kick(ctx,member:discord.Member):
+	if ctx.message.author.server_permissions.kick_members == True:
+		await bot.kick(member)
+		embed=discord.Embed(title="⚒️ KICKED ⚒️",description=member.display_name+" has been kicked by "+ctx.message.author.display_name",colour=0xFFC600)
+		await bot.say(embed=embed)
+	else:
+		embed=discord.Embed(title="❕ Permission Error ❕",description=ctx.message.author.mention+"\nIt appears that you do not have the permission to Kick Members, which is required to kick someone!",colour=0xFFC600)
+		await bot.say(embed=embed)
+
+# Purge command
 @bot.command(pass_context=True)
 async def purge(ctx,num: int):
     await bot.purge_from(ctx.message.channel,limit=num)
