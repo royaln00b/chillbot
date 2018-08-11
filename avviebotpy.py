@@ -56,6 +56,7 @@ async def mute(ctx,member:discord.Member,*,reason="None"):
 			embed=discord.Embed(title="🤐 Mute 🤐",description='<@{}>, you have been muted. \nReason : `'.format(member.id)+reason+'`',colour=0xFFC600)
 			await asyncio.sleep(1)
 			await bot.add_roles(member,discord.utils.get(ctx.message.server.roles, name="Muted"))
+			await bot.say(embed=embed)
 		else:
 			embed=discord.Embed(title="❕ OOPS ❕",description=ctx.message.author.mention+"\nIt appears the role `Muted` is not in this server, create it to mute someone!",colour=0xFFC600)
 			await bot.say(embed=embed)
