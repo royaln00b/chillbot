@@ -50,10 +50,10 @@ async def settings(ctx,*,setting=None):
 #			Moderation Commands
 # Mute command
 @bot.command(pass_context=True)
-async def mute(ctx,member:discord.Member):
+async def mute(ctx,member:discord.Member,*,reason=None):
 	if ctx.message.author.server_permissions.manage_messages == True:
 		if "Muted" in [y.name for y in ctx.message.server.roles]:
-    			await bot.say('<@{}>, you have been muted'.format(member.id))
+    			await bot.say('<@{}>, you have been muted. \nReason : ```'+reason+'```'.format(member.id))
     			await asyncio.sleep(1)
     			await bot.add_roles(member,discord.utils.get(ctx.message.server.roles, name="Muted"))
 		else:
@@ -65,20 +65,20 @@ async def mute(ctx,member:discord.Member):
 
 # Kick command
 @bot.command(pass_context=True)
-async def kick(ctx,member:discord.Member):
+async def kick(ctx,member:discord.Member,*,reason=None):
 	if ctx.message.author.server_permissions.kick_members == True:
 		await bot.kick(member)
-		embed=discord.Embed(title="⚒️ KICKED ⚒️",description=member.display_name+" has been kicked by "+ctx.message.author.display_name,colour=0xFFC600)
+		embed=discord.Embed(title="⚒️ KICKED ⚒️",description=member.display_name+" has been kicked by "+ctx.message.author.display_name+"\nReason : ```"+str(reason)+"```",colour=0xFFC600)
 		await bot.say(embed=embed)
 	else:
 		embed=discord.Embed(title="❕ Permission Error ❕",description=ctx.message.author.mention+"\nIt appears that you do not have the permission to Kick Members, which is required to kick someone!",colour=0xFFC600)
 		await bot.say(embed=embed)
 # Ban command
 @bot.command(pass_context=True)
-async def ban(ctx,member:discord.Member):
+async def ban(ctx,member:discord.Member,*,reason=None):
 	if ctx.message.author.server_permissions.ban_members == True:
 		await bot.ban(member)
-		embed=discord.Embed(title="⚒️ BANNED ⚒️",description=member.display_name+" has been banned by "+ctx.message.author.display_name,colour=0xFFC600)
+		embed=discord.Embed(title="⚒️ BANNED ⚒️",description=member.display_name+" has been banned by "+ctx.message.author.display_name+"\nReason : ```"+str(reason)+"```",colour=0xFFC600)
 		await bot.say(embed=embed)
 	else:
 		embed=discord.Embed(title="❕ Permission Error ❕",description=ctx.message.author.mention+"\nIt appears that you do not have the permission to ban Members, which is required to ban someone!",colour=0xFFC600)
