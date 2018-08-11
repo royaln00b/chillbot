@@ -12,6 +12,7 @@ import dbhandler
 import os
 
 bot=commands.Bot(description="",command_prefix="-",pm_help=False)
+bot.remove_command('help')
 
 #			Commands
 
