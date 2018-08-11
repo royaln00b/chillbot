@@ -68,7 +68,7 @@ async def mute(ctx,member:discord.Member):
 async def kick(ctx,member:discord.Member):
 	if ctx.message.author.server_permissions.kick_members == True:
 		await bot.kick(member)
-		embed=discord.Embed(title="⚒️ KICKED ⚒️",description=member.display_name+" has been kicked by "+ctx.message.author.display_name",colour=0xFFC600)
+		embed=discord.Embed(title="⚒️ KICKED ⚒️",description=member.display_name+" has been kicked by "+ctx.message.author.display_name,colour=0xFFC600)
 		await bot.say(embed=embed)
 	else:
 		embed=discord.Embed(title="❕ Permission Error ❕",description=ctx.message.author.mention+"\nIt appears that you do not have the permission to Kick Members, which is required to kick someone!",colour=0xFFC600)
