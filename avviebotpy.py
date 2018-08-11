@@ -53,7 +53,7 @@ async def settings(ctx,*,setting=None):
 async def mute(ctx,member:discord.Member,*,reason="None"):
 	if ctx.message.author.server_permissions.manage_messages == True:
 		if "Muted" in [y.name for y in ctx.message.server.roles]:
-    			await bot.say('<@{}>, you have been muted. \nReason : `'.format(member.id)+reason+'`')
+			embed=discord.Embed(title="🤐 Mute 🤐",description='<@{}>, you have been muted. \nReason : `'.format(member.id)+reason+'`',colour=0xFFC600)
     			await asyncio.sleep(1)
     			await bot.add_roles(member,discord.utils.get(ctx.message.server.roles, name="Muted"))
 		else:
