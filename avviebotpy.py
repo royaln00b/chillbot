@@ -47,6 +47,18 @@ async def settings(ctx,*,setting=None):
 		embed=discord.Embed(title="Server Settings",description=status,colour=0xFFC600)
 		await bot.send_message(ctx.message.channel,embed=embed)
 
+#			Moderation Commands
+
+@bot.command(pass_context=True)
+async def mute(ctx,member:discord.Member):
+	if "muted" in [y.name.lower() for y in ctx.server.roles]:
+    		await bot.say('<@{}>, you have been muted'.format(member.id))
+    		await asyncio.sleep(1)
+    		await bot.add_roles(member,discord.utils.get(ctx.message.server.roles, name="Muted"))
+	else:
+		embed=discord.Embed(title="❕ OOPS ❕",description=ctx.message.author.mention+"\nIt appears the role `Muted` is not in this server, create it to mute someone!")
+		await bot.say(embed=embed)
+
 
 #			Events
 
