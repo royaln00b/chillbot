@@ -52,7 +52,7 @@ async def avatar(ctx,*,member:discord.Member=None):
 @bot.command(pass_context=True)
 async def settings(ctx,*,setting=None):
 	if setting == None:
-		status = str(dbhandler.display())
+		status = str(dbhandler.display(ctx))
 		status = status.replace("'","")
 		status = status.replace("(","")
 		status = status.replace(")","")
