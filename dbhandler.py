@@ -30,11 +30,12 @@ def addserveronmessage(message):
 	rows = c.fetchall()
 	string = '\n'.join(str(row) for row in rows)
 	if not str(message.server.id) in string:
-		c.execute("INSERT INTO settings VALUES(%s,%s,%s)",(message.server.id,"moderation","off"))
+		c.execute("INSERT INTO settings VALUES(%s,%s,%s)",(message.server.id,"moderation","off",))
 		conn.commit()
 
 def settingchange(ctx,setting,status):
 	c.execute('UPDATE settings SET status = %s WHERE serverid = %s AND setting = %s', (status,ctx.message.server.id,setting,))
+	conn.commit()
 
 def settingcheck(ctx,setting):
 	c.execute("SELECT status FROM settings WHERE serverid = %s AND setting = %s",(ctx.message.server.id,setting,))
