@@ -30,7 +30,7 @@ def addserveronmessage(message):
 	rows = c.fetchall()
 	string = '\n'.join(str(row) for row in rows)
 	if not str(message.author.server.id) in string:
-		c.execute("INSERT INTO settings VALUES(%s,'moderation','off')",(message.server.id))
+		c.execute("INSERT INTO settings VALUES(%s,%s,%s)",(message.server.id,"moderation","off"))
 		conn.commit()
 
 create_table()
