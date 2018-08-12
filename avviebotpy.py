@@ -62,9 +62,9 @@ async def settings(ctx,setting=None,*,status=None):
 		embed=discord.Embed(title="Server Settings",description=status,colour=0xFFC600)
 		await bot.send_message(ctx.message.channel,embed=embed)
 	# Turn options off / on
-	elif setting is in _settings:
+	elif setting in _settings:
 		if setting == "moderation":
-			if status is in _status:
+			if status in _status:
 				dbhandler.settingchange(ctx,setting,status)
 				await bot.say("Yep")
 				
