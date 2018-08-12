@@ -68,7 +68,7 @@ async def settings(ctx,setting=None,*,status=None):
 				dbhandler.settingchange(ctx,setting,status)
 				embed=discord.Embed(title="⚙️ SETTINGS ⚙️",description=ctx.message.author.name+" changed "+setting+" to "+status,colour=0xFFC600)
 				await bot.say(embed=embed)
-			if status in _status:
+			else:
 				embed=discord.Embed(title="SETTINGS ERROR",description="`ERROR` "+status+" not applicable!",colour=0xFFC600)
 				await bot.say(embed=embed)
 	else:
