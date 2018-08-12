@@ -20,7 +20,7 @@ def create_table():
 """
 
 def display(ctx):
-	c.execute('SELECT setting, status, serverid FROM settings WHERE serverid= {0}'.format(ctx.message.server.id))
+	c.execute('SELECT setting, status, serverid FROM settings WHERE serverid= %s',(ctx.message.server.id,))
 	rows = c.fetchall()
 	lines = '\n'.join(f'{i+1}. {line}' for i, line in enumerate(rows))
 	return lines
