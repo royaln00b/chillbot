@@ -19,8 +19,8 @@ def create_table():
     c.execute('CREATE TABLE IF NOT EXISTS currency()')
 """
 
-def display():
-	c.execute('SELECT setting, status, serverid FROM settings')
+def display(ctx):
+	c.execute('SELECT setting, status, serverid FROM settings WHERE serverid= %s',(ctx.message.server.id))
 	rows = c.fetchall()
 	lines = '\n'.join(f'{i+1}. {line}' for i, line in enumerate(rows))
 	return lines
