@@ -25,14 +25,13 @@ async def help(ctx,*,command=None):
 		await bot.send_message(ctx.message.channel,embed=embed)
 
 # Ping command
-
 @bot.command(pass_context=True)
 async def ping(ctx):
 	channel = ctx.message.channel
 	t1 = time.perf_counter()
 	await bot.send_typing(channel)
 	t2 = time.perf_counter()
-	embed=discord.Embed(title=None, description='Ping: {}ms'.format(round(((t2-t1)*1000)-100)), colour = 0xFFC600)
+	embed=discord.Embed(title="🏓 PING 🏓", description='\n**{}ms**\n'.format(round(((t2-t1)*1000)-100)), colour = 0xFFC600)
 	embed.set_footer(text="Requested by : "+ctx.message.author.display_name, icon_url=ctx.message.author.avatar_url)
 	await bot.say(embed=embed)
 
