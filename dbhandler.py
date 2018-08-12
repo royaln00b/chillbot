@@ -20,7 +20,7 @@ def create_table():
 """
 
 def display(ctx):
-	c.execute('SELECT setting, status, serverid FROM settings WHERE serverid= %s',(ctx.message.server.id,))
+	c.execute('SELECT setting, status FROM settings WHERE serverid= %s',(ctx.message.server.id,))
 	rows = c.fetchall()
 	lines = '\n'.join(f'{i+1}. {line}' for i, line in enumerate(rows))
 	return lines
@@ -32,5 +32,8 @@ def addserveronmessage(message):
 	if not str(message.author.server.id) in string:
 		c.execute("INSERT INTO settings VALUES(%s,%s,%s)",(message.server.id,"moderation","off"))
 		conn.commit()
+
+def settingchange(ctx,setting,status):
+	c.execute('UPDATE settings SET status = %s WHERE serverid = %s AND setting = %s', (status,ctx.message.author.id,setting,))
 
 create_table()
