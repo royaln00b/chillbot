@@ -12,7 +12,7 @@ c = conn.cursor()
 
 
 def create_table():
-	c.execute('CREATE TABLE IF NOT EXISTS settings(setting TEXT, status TEXT, serverid TEXT)')
+	c.execute('CREATE TABLE IF NOT EXISTS settings(serverid BIGINT, setting TEXT, status TEXT)')
 
 """
 def create_table():
@@ -30,7 +30,7 @@ def addserveronmessage(message):
 	rows = c.fetchall()
 	string = '\n'.join(str(row) for row in rows)
 	if not str(message.author.server.id) in string:
-		c.execute("INSERT INTO settings VALUES('moderation','off',%s)",(message.server.id))
+		c.execute("INSERT INTO settings VALUES(%s,'moderation','off')",(message.server.id))
 		conn.commit()
 
 create_table()
