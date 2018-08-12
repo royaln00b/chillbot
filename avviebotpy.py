@@ -131,7 +131,7 @@ async def purge(ctx,num: int):
 			embed=discord.Embed(title="❕ Permission Error ❕",description=ctx.message.author.mention+"\nIt appears that you do not have the permission to Manage Messages, which is required to purge messages!",colour=0xFFC600)
 			await bot.say(embed=embed)
 	else:
-		embed=discord.Embed(title="SETTING ERROR",description="It appears your server does not have the `moderation` setting turned on!")
+		embed=discord.Embed(title="SETTING ERROR",description="It appears your server does not have the `moderation` setting turned on!   "+status)
 		await bot.say(embed=embed)
 
 #			Events
