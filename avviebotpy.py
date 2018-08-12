@@ -102,12 +102,16 @@ async def ban(ctx,member:discord.Member,*,reason="None"):
 # Purge command
 @bot.command(pass_context=True)
 async def purge(ctx,num: int):
-	await bot.purge_from(ctx.message.channel,limit=num+1)
-	embed=discord.Embed(title="🗑️ PURGE 🗑️",description=str(num)+" message(s) deleted from "+ctx.message.channel.name,colour=0xFFC600)
-	embed.set_footer(text="Deleted by : "+ctx.message.author.display_name+" - Message will be deleted in 5 seconds", icon_url=ctx.message.author.avatar_url)
-	message = await bot.say(embed=embed)
-	await asyncio.sleep(5)
-	await bot.delete_message(message)
+	if ctx.message.author.server_permissions.manage_messages == True:
+		await bot.purge_from(ctx.message.channel,limit=num+1)
+		embed=discord.Embed(title="🗑️ PURGE 🗑️",description=str(num)+" message(s) deleted from "+ctx.message.channel.name,colour=0xFFC600)
+		embed.set_footer(text="Deleted by : "+ctx.message.author.display_name+" - Message will be deleted in 5 seconds", icon_url=ctx.message.author.avatar_url)
+		message = await bot.say(embed=embed)
+		await asyncio.sleep(5)
+		await bot.delete_message(message)
+	else:
+		embed=discord.Embed(title="❕ Permission Error ❕",description=ctx.message.author.mention+"\nIt appears that you do not have the permission to Manage Messages, which is required to purge messages!",colour=0xFFC600)
+		await bot.say(embed=embed)
 
 
 #			Events
