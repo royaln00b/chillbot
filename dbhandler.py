@@ -29,7 +29,7 @@ def addserveronmessage(message):
 	c.execute("SELECT serverid FROM settings")
 	rows = c.fetchall()
 	string = '\n'.join(str(row) for row in rows)
-	if not str(message.author.server.id) in string:
+	if not str(message.server.id) in string:
 		c.execute("INSERT INTO settings VALUES(%s,%s,%s)",(message.server.id,"moderation","off"))
 		conn.commit()
 
