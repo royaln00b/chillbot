@@ -47,19 +47,29 @@ async def avatar(ctx,*,member:discord.Member=None):
 	embed.set_image(url = member.avatar_url)
 	embed.set_footer(text="Requested by : "+ctx.message.author.display_name, icon_url=ctx.message.author.avatar_url)
 	await bot.send_message(ctx.message.channel,embed=embed)
-
+#			Settings commands
+_settings=["moderation"]
+_status=["on","off"]
 # Display settings
 @bot.command(pass_context=True)
-async def settings(ctx,*,setting=None):
+async def settings(ctx,setting=None,*,status=None):
 	if setting == None:
 		status = str(dbhandler.display(ctx))
 		status = status.replace("'","")
 		status = status.replace("(","")
 		status = status.replace(")","")
 		status = status.replace(","," -")
-
 		embed=discord.Embed(title="Server Settings",description=status,colour=0xFFC600)
 		await bot.send_message(ctx.message.channel,embed=embed)
+	# Turn options off / on
+	elif setting is in _settings:
+		if setting == "moderation":
+			if status is in _status:
+				dbhandler.settingchange(ctx,setting,status)
+				await bot.say("Yep")
+				
+		
+
 
 #			Moderation Commands
 # Mute command
