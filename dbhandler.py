@@ -31,6 +31,8 @@ def addserveronmessage(message):
 	string = '\n'.join(str(row) for row in rows)
 	if not str(message.server.id) in string:
 		c.execute("INSERT INTO settings VALUES(%s,%s,%s)",(message.server.id,"moderation","off",))
+		c.execute("INSERT INTO settings VALUES(%s,%s,%s)",(message.server.id,"joins","off",))
+		c.execute("INSERT INTO settings VALUES(%s,%s,%s)",(message.server.id,"leaves","off",))
 		conn.commit()
 
 def settingchange(ctx,setting,status):
