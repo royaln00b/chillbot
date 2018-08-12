@@ -115,7 +115,10 @@ async def purge(ctx,num: int):
 
 
 #			Events
-
+@bot.event
+async def on_message(message):
+	dbhandler.addserveronmessage(message)
+	await bot.process_commands(message)
 
 
 #			Running
