@@ -59,7 +59,8 @@ async def settings(ctx,setting=None,*,status=None):
 		status = status.replace("(","")
 		status = status.replace(")","")
 		status = status.replace(","," -")
-		embed=discord.Embed(title="Server Settings",description=status,colour=0xFFC600)
+		embed=discord.Embed(title="Server Settings | "+ctx.message.server.name,description=status,colour=0xFFC600)
+		embed.set_thumbnail(url = ctx.message.server.avatar_url)
 		await bot.send_message(ctx.message.channel,embed=embed)
 	# Turn options off / on
 	elif setting in _settings:
