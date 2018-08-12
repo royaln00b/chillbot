@@ -48,7 +48,7 @@ async def avatar(ctx,*,member:discord.Member=None):
 	embed.set_footer(text="Requested by : "+ctx.message.author.display_name, icon_url=ctx.message.author.avatar_url)
 	await bot.send_message(ctx.message.channel,embed=embed)
 #			Settings commands
-_settings=["moderation"]
+_settings=["moderation","joins","leaves"]
 _status=["on","off"]
 # Display settings
 @bot.command(pass_context=True)
@@ -59,6 +59,8 @@ async def settings(ctx,setting=None,*,status=None):
 		status = status.replace("(","")
 		status = status.replace(")","")
 		status = status.replace(","," -")
+		status = status.replace("on","✅")
+		status = status.replace("off","❌")
 		embed=discord.Embed(title="Server Settings | "+ctx.message.server.name,description=status,colour=0xFFC600)
 		embed.set_thumbnail(url = ctx.message.server.icon_url)
 		await bot.send_message(ctx.message.channel,embed=embed)
@@ -69,6 +71,12 @@ async def settings(ctx,setting=None,*,status=None):
 				dbhandler.settingchange(ctx,setting,status)
 				embed=discord.Embed(title="⚙️ SETTINGS ⚙️",description=ctx.message.author.name+" changed "+setting+" to "+status,colour=0xFFC600)
 				await bot.say(embed=embed)
+			else:
+				embed=discord.Embed(title="SETTINGS ERROR",description="`ERROR` "+status+" not applicable!",colour=0xFFC600)
+				await bot.say(embed=embed)
+		elif setting == "joins":
+			if status in _status:
+				dbhandler.settingchange(ctx,setting,status)
 			else:
 				embed=discord.Embed(title="SETTINGS ERROR",description="`ERROR` "+status+" not applicable!",colour=0xFFC600)
 				await bot.say(embed=embed)
