@@ -66,7 +66,14 @@ async def settings(ctx,setting=None,*,status=None):
 		if setting == "moderation":
 			if status in _status:
 				dbhandler.settingchange(ctx,setting,status)
-				await bot.say("Yep")
+				embed=discord.Embed(title="⚙️ SETTINGS ⚙️",description=ctx.message.author.name+" changed "+setting+" to "+status,colour=0xFFC600)
+				await bot.say(embed=embed)
+			if status in _status:
+				embed=discord.Embed(title="SETTINGS ERROR",description="`ERROR` "+status+" not applicable!",colour=0xFFC600)
+				await bot.say(embed=embed)
+	else:
+		embed=discord.Embed(title="SETTINGS ERROR",description="`ERROR` "+setting+" not applicable!",colour=0xFFC600)
+		await bot.say(embed=embed)
 				
 		
 
@@ -132,7 +139,7 @@ async def purge(ctx,num: int):
 			embed=discord.Embed(title="❕ Permission Error ❕",description=ctx.message.author.mention+"\nIt appears that you do not have the permission to Manage Messages, which is required to purge messages!",colour=0xFFC600)
 			await bot.say(embed=embed)
 	else:
-		embed=discord.Embed(title="SETTING ERROR",description="It appears your server does not have the `moderation` setting turned on!")
+		embed=discord.Embed(title="SETTINGS ERROR",description="It appears your server does not have the `moderation` setting turned on!",colour=0xFFC600)
 		await bot.say(embed=embed)
 
 #			Events
