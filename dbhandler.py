@@ -34,6 +34,6 @@ def addserveronmessage(message):
 		conn.commit()
 
 def settingchange(ctx,setting,status):
-	c.execute('UPDATE settings SET status = %s WHERE serverid = %s AND setting = %s', (status,ctx.message.author.id,setting,))
+	c.execute('UPDATE settings SET status = %s WHERE serverid = %s AND setting = %s', (status,ctx.message.server.id,setting,))
 
 create_table()
