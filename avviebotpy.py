@@ -113,7 +113,13 @@ async def ban(ctx,member:discord.Member,*,reason="None"):
 @bot.command(pass_context=True)
 async def purge(ctx,num: int):
 	setting = "moderation"
-	if dbhandler.settingcheck(ctx,setting) == "on":
+	status = str(dbhandler.settingcheck(ctx,setting))
+	status = status.replace("[","")
+	status = status.replace("]","")
+	status = status.replace("'","")
+	status = status.replace("(","")
+	status = status.replace(")","")
+	if status == "on":
 		if ctx.message.author.server_permissions.manage_messages == True:
 			await bot.purge_from(ctx.message.channel,limit=num+1)
 			embed=discord.Embed(title="🗑️ PURGE 🗑️",description=str(num)+" message(s) deleted from "+ctx.message.channel.name,colour=0xFFC600)
