@@ -36,4 +36,9 @@ def addserveronmessage(message):
 def settingchange(ctx,setting,status):
 	c.execute('UPDATE settings SET status = %s WHERE serverid = %s AND setting = %s', (status,ctx.message.server.id,setting,))
 
+def settingcheck(ctx,setting):
+	c.execute("SELECT status FROM settings WHERE serverid = %s AND setting = %s",(ctx.message.server.id,setting))
+	state = c.fetchone()
+	return state
+
 create_table()
