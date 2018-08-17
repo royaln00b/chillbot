@@ -47,7 +47,7 @@ async def info(ctx,*,member:discord.Member=None):
 			game="None"
 		else:
 			game=member.game
-		embed=discord.Embed(title=member.name+"'s Info",description="Current nickname - "+member.display_name+"\nId - "+str(member.id)+"\nGame being played - "+game+"\nTop Role - "+str(member.top_role)+"\nRole Colour - "+str(member.colour)+"\nJoined "+ctx.message.server.name+" - "+member.joined_at.strftime("%Y-%m-%d %H:%M:%S")+"\nStatus - "+member.status,colour=0xFFC600)
+		embed=discord.Embed(title=member.name+"'s Info",description="Current nickname - "+member.display_name+"\nId - "+str(member.id)+"\nGame being played - "+game+"\nTop Role - "+str(member.top_role)+"\nRole Colour - "+str(member.colour)+"\nJoined "+ctx.message.server.name+" - "+member.joined_at.strftime("%Y-%m-%d %H:%M:%S")+"\nStatus - "+str(member.status),colour=0xFFC600)
 		embed.set_thumbnail(url = member.avatar_url)
 		embed = embed.replace(None,"None")
 		embed.set_footer(text="Requested by : "+ctx.message.author.display_name, icon_url=ctx.message.author.avatar_url)
