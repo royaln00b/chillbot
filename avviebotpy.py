@@ -47,6 +47,8 @@ async def avatar(ctx,*,member:discord.Member=None):
 	embed.set_image(url = member.avatar_url)
 	embed.set_footer(text="Requested by : "+ctx.message.author.display_name, icon_url=ctx.message.author.avatar_url)
 	await bot.send_message(ctx.message.channel,embed=embed)
+
+	
 #			Settings commands
 _settings=["moderation","joins","leaves"]
 _status=["on","off"]
@@ -65,25 +67,38 @@ async def settings(ctx,setting=None,*,status=None):
 		embed.set_thumbnail(url = ctx.message.server.icon_url)
 		await bot.send_message(ctx.message.channel,embed=embed)
 	# Turn options off / on
-	elif setting in _settings:
-		if setting == "moderation":
-			if status in _status:
-				dbhandler.settingchange(ctx,setting,status)
-				embed=discord.Embed(title="⚙️ SETTINGS ⚙️",description=ctx.message.author.name+" changed "+setting+" to "+status,colour=0xFFC600)
-				await bot.say(embed=embed)
-			else:
-				embed=discord.Embed(title="SETTINGS ERROR",description="`ERROR` "+status+" not applicable!",colour=0xFFC600)
-				await bot.say(embed=embed)
-		elif setting == "joins":
-			if status in _status:
-				dbhandler.settingchange(ctx,setting,status)
-			else:
-				embed=discord.Embed(title="SETTINGS ERROR",description="`ERROR` "+status+" not applicable!",colour=0xFFC600)
-				await bot.say(embed=embed)
+	if ctx.message.author.server_permissions.administrator == True:
+		elif setting in _settings:
+			if setting == "moderation":
+				if status in _status:
+					dbhandler.settingchange(ctx,setting,status)
+					embed=discord.Embed(title="⚙️ SETTINGS ⚙️",description=ctx.message.author.name+" changed "+setting+" to "+status,colour=0xFFC600)
+					await bot.say(embed=embed)
+				else:
+					embed=discord.Embed(title="⛔️ SETTINGS ERROR ⛔️",description="`ERROR` "+status+" not applicable!",colour=0xFFC600)
+					await bot.say(embed=embed)
+			elif setting == "joins":
+				if status in _status:
+					dbhandler.settingchange(ctx,setting,status)
+					embed=discord.Embed(title="⚙️ SETTINGS ⚙️",description=ctx.message.author.name+" changed "+setting+" to "+status,colour=0xFFC600)
+					await bot.say(embed=embed)
+				else:
+					embed=discord.Embed(title="⛔️ SETTINGS ERROR ⛔️",description="`ERROR` "+status+" not applicable!",colour=0xFFC600)
+					await bot.say(embed=embed)
+			elif setting == "leaves":
+				if status in _status:
+					dbhandler.settingchange(ctx,setting,status)
+					embed=discord.Embed(title="⚙️ SETTINGS ⚙️",description=ctx.message.author.name+" changed "+setting+" to "+status,colour=0xFFC600)
+					await bot.say(embed=embed)
+				else:
+					embed=discord.Embed(title="⛔️ SETTINGS ERROR ⛔️",description="`ERROR` "+status+" not applicable!",colour=0xFFC600)
+					await bot.say(embed=embed)
+		else:
+			embed=discord.Embed(title="⛔️ SETTINGS ERROR ⛔️",description="`ERROR` "+setting+" not applicable!",colour=0xFFC600)
+			await bot.say(embed=embed)
 	else:
-		embed=discord.Embed(title="SETTINGS ERROR",description="`ERROR` "+setting+" not applicable!",colour=0xFFC600)
+		embed=discord.Embed(title="⛔️ PERMISSION ERROR ⛔️",description=ctx.message.author.name+", you need to have the `administrator` permission to edit the server settings!",colour=0xFFC600)
 		await bot.say(embed=embed)
-				
 		
 
 
@@ -101,7 +116,7 @@ async def mute(ctx,member:discord.Member,*,reason="None"):
 			embed=discord.Embed(title="❕ OOPS ❕",description=ctx.message.author.mention+"\nIt appears the role `Muted` is not in this server, create it to mute someone!",colour=0xFFC600)
 			await bot.say(embed=embed)
 	else:
-		embed=discord.Embed(title="❕ Permission Error ❕",description=ctx.message.author.mention+"\nIt appears that you do not have the permission to Manage Messages, which is required to mute someone!",colour=0xFFC600)
+		embed=discord.Embed(title="⛔️ Permission Error ⛔️",description=ctx.message.author.mention+"\nIt appears that you do not have the permission to Manage Messages, which is required to mute someone!",colour=0xFFC600)
 		await bot.say(embed=embed)
 
 # Kick command
@@ -112,7 +127,7 @@ async def kick(ctx,member:discord.Member,*,reason="None"):
 		embed=discord.Embed(title="⚒️ KICKED ⚒️",description=member.display_name+" has been kicked by "+ctx.message.author.display_name+"\nReason : `"+str(reason)+"`",colour=0xFFC600)
 		await bot.say(embed=embed)
 	else:
-		embed=discord.Embed(title="❕ Permission Error ❕",description=ctx.message.author.mention+"\nIt appears that you do not have the permission to Kick Members, which is required to kick someone!",colour=0xFFC600)
+		embed=discord.Embed(title="⛔️ Permission Error ⛔️",description=ctx.message.author.mention+"\nIt appears that you do not have the permission to Kick Members, which is required to kick someone!",colour=0xFFC600)
 		await bot.say(embed=embed)
 # Ban command
 @bot.command(pass_context=True)
@@ -122,7 +137,7 @@ async def ban(ctx,member:discord.Member,*,reason="None"):
 		embed=discord.Embed(title="⚒️ BANNED ⚒️",description=member.display_name+" has been banned by "+ctx.message.author.display_name+"\nReason : `"+str(reason)+"`",colour=0xFFC600)
 		await bot.say(embed=embed)
 	else:
-		embed=discord.Embed(title="❕ Permission Error ❕",description=ctx.message.author.mention+"\nIt appears that you do not have the permission to ban Members, which is required to ban someone!",colour=0xFFC600)
+		embed=discord.Embed(title="⛔️ Permission Error ⛔️",description=ctx.message.author.mention+"\nIt appears that you do not have the permission to ban Members, which is required to ban someone!",colour=0xFFC600)
 		await bot.say(embed=embed)
 
 # Purge command
@@ -145,10 +160,10 @@ async def purge(ctx,num: int):
 			await asyncio.sleep(5)
 			await bot.delete_message(message)
 		else:
-			embed=discord.Embed(title="❕ Permission Error ❕",description=ctx.message.author.mention+"\nIt appears that you do not have the permission to Manage Messages, which is required to purge messages!",colour=0xFFC600)
+			embed=discord.Embed(title="⛔️ Permission Error ⛔️",description=ctx.message.author.mention+"\nIt appears that you do not have the permission to Manage Messages, which is required to purge messages!",colour=0xFFC600)
 			await bot.say(embed=embed)
 	else:
-		embed=discord.Embed(title="SETTINGS ERROR",description="It appears your server does not have the `moderation` setting turned on!",colour=0xFFC600)
+		embed=discord.Embed(title="⛔️ SETTINGS ERROR ⛔️",description="It appears your server does not have the `moderation` setting turned on!",colour=0xFFC600)
 		await bot.say(embed=embed)
 
 #			Events
@@ -156,7 +171,35 @@ async def purge(ctx,num: int):
 async def on_message(message):
 	dbhandler.addserveronmessage(message)
 	await bot.process_commands(message)
+@bot.event
+async def on_member_join(member):
+	setting = "joins"
+	status = str(dbhandler.settingcheck(ctx,setting))
+	status = status.replace("[","")
+	status = status.replace("]","")
+	status = status.replace("'","")
+	status = status.replace("(","")
+	status = status.replace(")","")
+	status = status.replace(",","")
+	if status == "on":
+		server = member.server
+		embed=discord.Embed(title="🔔 WELCOME 🔔",description="**{0.name}! Welcome to {1.name}. Enjoy your stay!**".format(member, server),colour=0xFFC600)
+		await bot.send_message(server.default_channel, embed=embed)
 
+@bot.event
+async def on_member_remove(member):
+	setting = "leaves"
+	status = str(dbhandler.settingcheck(ctx,setting))
+	status = status.replace("[","")
+	status = status.replace("]","")
+	status = status.replace("'","")
+	status = status.replace("(","")
+	status = status.replace(")","")
+	status = status.replace(",","")
+	if status == "on":
+		server = member.server
+		embed=discord.Embed(title="👋🏼 GOODBYE 👋🏼",description="**{0.name} left {1.name}!**".format(member, server),colour=0xFFC600)
+		await bot.send_message(server.default_channel, embed=embed)
 
 #			Running
 
