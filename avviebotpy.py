@@ -184,7 +184,7 @@ async def on_member_join(member):
 	if status == "on":
 		server = member.server
 		embed=discord.Embed(title="🔔 WELCOME 🔔",description="**{0.name}! Welcome to {1.name}. Enjoy your stay!**".format(member, server),colour=0xFFC600)
-		await bot.send_message(bot.get_channel(server.default_channel), embed=embed)
+		await bot.send_message(server.default_channel.id, embed=embed)
 
 @bot.event
 async def on_member_remove(member):
@@ -199,7 +199,7 @@ async def on_member_remove(member):
 	if status == "on":
 		server = member.server
 		embed=discord.Embed(title="👋🏼 GOODBYE 👋🏼",description="**{0.name} left {1.name}!**".format(member, server),colour=0xFFC600)
-		await bot.send_message(bot.get_channel(server.default_channel), embed=embed)
+		await bot.send_message(server.default_channel.id, embed=embed)
 
 #			Running
 
