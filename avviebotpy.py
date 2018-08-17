@@ -174,7 +174,7 @@ async def on_message(message):
 @bot.event
 async def on_member_join(member):
 	setting = "joins"
-	status = str(dbhandler.settingcheck(ctx,setting))
+	status = str(dbhandler.settingcheckmember(member,setting))
 	status = status.replace("[","")
 	status = status.replace("]","")
 	status = status.replace("'","")
@@ -189,7 +189,7 @@ async def on_member_join(member):
 @bot.event
 async def on_member_remove(member):
 	setting = "leaves"
-	status = str(dbhandler.settingcheck(ctx,setting))
+	status = str(dbhandler.settingcheckmember(member,setting))
 	status = status.replace("[","")
 	status = status.replace("]","")
 	status = status.replace("'","")
