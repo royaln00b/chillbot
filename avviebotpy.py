@@ -35,7 +35,22 @@ async def ping(ctx):
 	embed.set_footer(text="Requested by : "+ctx.message.author.display_name, icon_url=ctx.message.author.avatar_url)
 	await bot.say(embed=embed)
 
-
+# Info Command
+@bot.command(pass_context=True)
+async def info(ctx,*,member:discord.Member=None):
+	if member == None:
+		embed=discord.Embed(title="SERVER INFORMATION",description=ctx.message.server.name+" info:\nServer Created - "+ctx.message.server.created_at+"\nMember Count - "+ctx.message.server.member_count+"\nVerification level - "+ctx.message.server.verification_level+"\nOwner - "+ctx.message.server.owner+"\nId - "+ctx.message.server.id+"\nRegion - "+ctx.message.server.region,colour=0xFFC600)
+		embed.set_footer(text="Requested by : "+ctx.message.author.display_name, icon_url=ctx.message.author.avatar_url)
+		embed.set_thumbnail(url = ctx.message.server.icon_url)
+	else:
+		if member.game == None:
+			game="None"
+		else:
+			game=member.game
+		embed=discord.Embed(title=member.name+"'s Info",description="Current nickname - "+member.nick+"\nId - "+member.id+"\nGame being played - "+game+"\nTop Role - "+member.top_role+"\nRole Colour - "+member.colour+"\nJoined "+ctx.message.server.name+" - "+member.joined_at+"\nStatus - "+member.status,colour=0xFFC600)
+		embed.set_thumbnail(url = member.avatar_url)
+		embed.set_footer(text="Requested by : "+ctx.message.author.display_name, icon_url=ctx.message.author.avatar_url)
+	await bot.say(embed=embed)
 
 
 # Avatar Command
@@ -171,6 +186,7 @@ async def purge(ctx,num: int):
 async def on_message(message):
 	dbhandler.addserveronmessage(message)
 	await bot.process_commands(message)
+"""
 @bot.event
 async def on_member_join(member):
 	setting = "joins"
@@ -200,7 +216,7 @@ async def on_member_remove(member):
 		server = member.server
 		embed=discord.Embed(title="👋🏼 GOODBYE 👋🏼",description="**{0.name} left {1.name}!**".format(member, server),colour=0xFFC600)
 		await bot.send_message(server.default_channel.id, embed=embed)
-
+"""
 #			Running
 
 token = os.getenv('TOKEN')
