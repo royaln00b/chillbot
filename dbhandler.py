@@ -44,4 +44,9 @@ def settingcheck(ctx,setting):
 	state = c.fetchone()
 	return state
 
+def settingcheckmember(member,setting):
+	c.execute("SELECT status FROM settings WHERE serverid = %s AND setting = %s",(member.server.id,setting,))
+	state = c.fetchone()
+	return state
+
 create_table()
