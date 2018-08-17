@@ -68,7 +68,7 @@ async def settings(ctx,setting=None,*,status=None):
 		await bot.send_message(ctx.message.channel,embed=embed)
 	# Turn options off / on
 	if ctx.message.author.server_permissions.administrator == True:
-		elif setting in _settings:
+		if setting in _settings:
 			if setting == "moderation":
 				if status in _status:
 					dbhandler.settingchange(ctx,setting,status)
