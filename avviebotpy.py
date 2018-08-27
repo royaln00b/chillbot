@@ -83,7 +83,7 @@ async def warnings(ctx,*,member:discord.Member=None):
 		await bot.say(embed=embed)
 	
 #			Settings commands
-_settings=["moderation","joins","leaves"]
+_settings=["moderation","joins","leaves",None]
 _status=["on","off"]
 # Display settings
 @bot.command(pass_context=True)
