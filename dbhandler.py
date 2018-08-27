@@ -29,9 +29,8 @@ def display(ctx):
 
 def warnings(ctx,member):
 	c.execute('SELECT warnings FROM warns WHERE serverid= %s AND userid= %s',(ctx.message.server.id,member.id,))
-	rows = c.fetchall()
-	lines = '\n'.join(f'{i+1}. {line}' for i, line in rows)
-	return lines
+	status = c.fetchone()
+	return status
 
 def addserveronmessage(message):
 	c.execute("SELECT serverid FROM settings")
