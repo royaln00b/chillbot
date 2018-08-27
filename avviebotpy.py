@@ -159,12 +159,14 @@ async def mute(ctx,member:discord.Member,*,reason="None"):
 @bot.command(pass_context=True)
 async def warn(ctx,member:discord.Member,*,reason="None"):
 	if ctx.message.author.server_permissions.manage_messages == True:
+		dbhandler.addwarnsoncommand(ctx,member)
 		dbhandler.addwarning(ctx,member)
 		status=str(dbhandler.warnings(ctx,member))
 		status = status.replace("'","")
 		status = status.replace("(","")
 		status = status.replace(")","")
 		status = status.replace(",","")
+		status = status.replace("None","0")
 		if int(status) >= 3:
 			await bot.kick(member)
 			embed=discord.Embed(title="⚒️ AUTO-KICK ⚒️",description=member.display_name+" has been kicked for exceeding the warn limit on this server, they had `"+status+"` warnings!",colour=0xFFC600)
