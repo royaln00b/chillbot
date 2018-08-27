@@ -55,6 +55,15 @@ def addwarnsonmessage(message):
 			c.execute("INSERT INTO warns VALUES(%s,%s,%s)",(message.server.id,message.author.id,0,))
 			conn.commit()
 
+def addwarnsoncommand(ctx,member):
+	c.execute("SELECT serverid, userid FROM warns")
+	rows = c.fetchall()
+	string = '\n'.join(str(row) for row in rows)
+	if not str(ctx.message.server.id) in string:
+		if not str(member.id) in string:
+			c.execute("INSERT INTO warns VALUES(%s,%s,%s)",(ctx.message.server.id,member.id,0,))
+			conn.commit()
+
 def settingchange(ctx,setting,status):
 	c.execute('UPDATE settings SET status = %s WHERE serverid = %s AND setting = %s', (status,ctx.message.server.id,setting,))
 	conn.commit()
