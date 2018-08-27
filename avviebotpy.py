@@ -158,7 +158,6 @@ async def mute(ctx,member:discord.Member,*,reason="None"):
 # Warn command
 @bot.command(pass_context=True)
 async def warn(ctx,member:discord.Member,*,reason="None"):
-	dbhandler.addwarnsoncommand(ctx,member)
 	if ctx.message.author.server_permissions.manage_messages == True:
 		dbhandler.addwarning(ctx,member)
 		status=str(dbhandler.warnings(ctx,member))
@@ -166,13 +165,17 @@ async def warn(ctx,member:discord.Member,*,reason="None"):
 		status = status.replace("(","")
 		status = status.replace(")","")
 		status = status.replace(",","")
-		if int(status) >= 5:
-			await bot.kick(member)
-			embed=discord.Embed(title="⚒️ AUTO-KICK ⚒️",description=member.display_name+" has been kicked for exceeding the warn limit on this server, they had `"+status+"` warnings!",colour=0xFFC600)
+		if status == "None":
+			embed=discord.Embed(title="⛔️ Database Error ⛔️",description=ctx.message.author.mention+"\nIt appears that the person you are trying to warn is not in the database, this means they have not talked in the server! This is required to warn someone!",colour=0xFFC600)
 			await bot.say(embed=embed)
 		else:
-			embed=discord.Embed(title="❗️ WARNING ❗️",description=member.display_name+" you have been warned by "+ctx.message.author.display_name+"\nReason : `"+str(reason)+"`\nYou now have `"+status+"` warnings!",colour=0xFFC600)
-			await bot.say(embed=embed)		
+			if int(status) >= 5:
+				await bot.kick(member)
+				embed=discord.Embed(title="⚒️ AUTO-KICK ⚒️",description=member.display_name+" has been kicked for exceeding the warn limit on this server, they had `"+status+"` warnings!",colour=0xFFC600)
+				await bot.say(embed=embed)
+			else:
+				embed=discord.Embed(title="❗️ WARNING ❗️",description=member.display_name+" you have been warned by "+ctx.message.author.display_name+"\nReason : `"+str(reason)+"`\nYou now have `"+status+"` warnings!",colour=0xFFC600)
+				await bot.say(embed=embed)		
 	else:
 		embed=discord.Embed(title="⛔️ Permission Error ⛔️",description=ctx.message.author.mention+"\nIt appears that you do not have the permission to manage messages, which is required to warn someone!",colour=0xFFC600)
 		await bot.say(embed=embed)
