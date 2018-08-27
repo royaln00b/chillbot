@@ -13,7 +13,7 @@ c = conn.cursor()
 
 def create_table():
 	c.execute('CREATE TABLE IF NOT EXISTS settings(serverid BIGINT, setting TEXT, status TEXT)')
-	c.execute('CREATE TABLE IF NOT EXISTS warns(serverid BIGINT, userid BIGINT, warnings INT)')
+	c.execute('CREATE TABLE IF NOT EXISTS warns(serverid BIGINT, userid BIGINT, warnings INTEGER)')
 	
 
 """
