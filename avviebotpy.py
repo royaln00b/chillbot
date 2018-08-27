@@ -157,7 +157,7 @@ async def mute(ctx,member:discord.Member,*,reason="None"):
 
 # Warn command
 @bot.command(pass_context=True)
-asnyc def warn(ctx,member:discord.Member,*,reason="None"):
+async def warn(ctx,member:discord.Member,*,reason="None"):
 	if ctx.message.author.server_permissions.manage_messages == True:
 		dbhandler.addwarning(ctx,member)
 		status=str(dbhandler.warnings(ctx,member))
