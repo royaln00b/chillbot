@@ -47,9 +47,10 @@ def addwarnsonmessage(message):
 	c.execute("SELECT serverid, userid FROM warns")
 	rows = c.fetchall()
 	string = '\n'.join(str(row) for row in rows)
-	if not str(message.server.id) and str(message.author.id) in string:
-		c.execute("INSERT INTO warns VALUES(%s,%s,%s)",(message.server.id,message.author.id,0,))
-		conn.commit()
+	if not str(message.server.id) in string:
+		if not str(message.author.id) in string:
+			c.execute("INSERT INTO warns VALUES(%s,%s,%s)",(message.server.id,message.author.id,0,))
+			conn.commit()
 
 def settingchange(ctx,setting,status):
 	c.execute('UPDATE settings SET status = %s WHERE serverid = %s AND setting = %s', (status,ctx.message.server.id,setting,))
