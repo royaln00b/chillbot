@@ -62,7 +62,24 @@ async def avatar(ctx,*,member:discord.Member=None):
 	embed.set_image(url = member.avatar_url)
 	embed.set_footer(text="Requested by : "+ctx.message.author.display_name, icon_url=ctx.message.author.avatar_url)
 	await bot.send_message(ctx.message.channel,embed=embed)
-
+# Check warnings command
+@bot.command(pass_context=True)
+async def warnings(ctx,*,member:discord.Member=None):
+	if member == None:
+		member = ctx.message.author
+		status=str(dbhandler.warnings(ctx,member))
+		status = status.replace("'","")
+		status = status.replace("(","")
+		status = status.replace(")","")
+		embed=discord.Embed(title=member.display_name+"'s warnings"description=member.display_name+" has `"+status+"` active warnings.")
+		await bot.say(embed=embed)
+	else:
+		status=str(dbhandler.warnings(ctx,member))
+		status = status.replace("'","")
+		status = status.replace("(","")
+		status = status.replace(")","")
+		embed=discord.Embed(title=member.display_name+"'s warnings"description=member.display_name+" has `"+status+"` active warnings.")
+		await bot.say(embed=embed)
 	
 #			Settings commands
 _settings=["moderation","joins","leaves"]
@@ -185,6 +202,7 @@ async def purge(ctx,num: int):
 @bot.event
 async def on_message(message):
 	dbhandler.addserveronmessage(message)
+	dbhandler.addwarnsonmessage(message)
 	await bot.process_commands(message)
 """
 @bot.event
