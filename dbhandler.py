@@ -32,6 +32,10 @@ def warnings(ctx,member):
 	status = c.fetchone()
 	return status
 
+def addwarning(ctx,member):
+	c.execute('UPDATE warns SET warnings = warnings + 1 WHERE serverid = %s AND userid = %s', (ctx.message.server.id,member.id,))
+	conn.commit()
+
 def addserveronmessage(message):
 	c.execute("SELECT serverid FROM settings")
 	rows = c.fetchall()
