@@ -68,22 +68,15 @@ async def avatar(ctx,*,member:discord.Member=None):
 async def warnings(ctx,*,member:discord.Member=None):
 	if member == None:
 		member = ctx.message.author
-		status=str(dbhandler.warnings(ctx,member))
-		status = status.replace("'","")
-		status = status.replace("(","")
-		status = status.replace(")","")
-		status = status.replace(",","")
-		embed=discord.Embed(title=member.display_name+"'s warnings",description=member.display_name+" has `"+status+"` active warnings.",colour=0xFFC600)
-		await bot.say(embed=embed)
-	else:
-		status=str(dbhandler.warnings(ctx,member))
-		status = status.replace("'","")
-		status = status.replace("(","")
-		status = status.replace(")","")
-		if status == "None":
-			status = "0"
-		embed=discord.Embed(title=member.display_name+"'s warnings",description=member.display_name+" has `"+status+"` active warnings.",colour=0xFFC600)
-		await bot.say(embed=embed)
+	status=str(dbhandler.warnings(ctx,member))
+	status = status.replace("'","")
+	status = status.replace("(","")
+	status = status.replace(")","")
+	if status == "None":
+		status = "0"
+	embed=discord.Embed(title=member.display_name+"'s warnings",description=member.display_name+" has `"+status+"` active warnings.",colour=0xFFC600)
+	embed.set_thumbnail(url = member.avatar_url)
+	await bot.say(embed=embed)
 	
 #			Settings commands
 _settings=["moderation","joins","leaves",None]
