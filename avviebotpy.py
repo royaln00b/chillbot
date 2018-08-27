@@ -72,6 +72,7 @@ async def warnings(ctx,*,member:discord.Member=None):
 	status = status.replace("'","")
 	status = status.replace("(","")
 	status = status.replace(")","")
+	status = status.replace(",","")
 	if status == "None":
 		status = "0"
 	embed=discord.Embed(title=member.display_name+"'s warnings",description=member.display_name+" has `"+status+"` active warnings.",colour=0xFFC600)
