@@ -136,63 +136,112 @@ async def settings(ctx,setting=None,*,status=None):
 # Mute command
 @bot.command(pass_context=True)
 async def mute(ctx,member:discord.Member,*,reason="None"):
-	if ctx.message.author.server_permissions.manage_messages == True:
-		if "Muted" in [y.name for y in ctx.message.server.roles]:
-			embed=discord.Embed(title="🤐 Mute 🤐",description='{}, you have been muted. \nReason : `'.format(member.display_name)+reason+'`',colour=0xFFC600)
-			await asyncio.sleep(1)
-			await bot.add_roles(member,discord.utils.get(ctx.message.server.roles, name="Muted"))
-			await bot.say(embed=embed)
+	setting = "moderation"
+	status = str(dbhandler.settingcheck(ctx,setting))
+	status = status.replace("[","")
+	status = status.replace("]","")
+	status = status.replace("'","")
+	status = status.replace("(","")
+	status = status.replace(")","")
+	status = status.replace(",","")
+	if status == "on":
+		if ctx.message.author.server_permissions.manage_messages == True:
+			if "Muted" in [y.name for y in ctx.message.server.roles]:
+				embed=discord.Embed(title="🤐 Mute 🤐",description='{}, you have been muted. \nReason : `'.format(member.display_name)+reason+'`',colour=0xFFC600)
+				await asyncio.sleep(1)
+				await bot.add_roles(member,discord.utils.get(ctx.message.server.roles, name="Muted"))
+				await bot.say(embed=embed)
+			else:
+				embed=discord.Embed(title="❕ OOPS ❕",description=ctx.message.author.mention+"\nIt appears the role `Muted` is not in this server, create it to mute someone!",colour=0xFFC600)
+				await bot.say(embed=embed)
 		else:
-			embed=discord.Embed(title="❕ OOPS ❕",description=ctx.message.author.mention+"\nIt appears the role `Muted` is not in this server, create it to mute someone!",colour=0xFFC600)
+			embed=discord.Embed(title="⛔️ Permission Error ⛔️",description=ctx.message.author.mention+"\nIt appears that you do not have the permission to Manage Messages, which is required to mute someone!",colour=0xFFC600)
 			await bot.say(embed=embed)
 	else:
-		embed=discord.Embed(title="⛔️ Permission Error ⛔️",description=ctx.message.author.mention+"\nIt appears that you do not have the permission to Manage Messages, which is required to mute someone!",colour=0xFFC600)
+		embed=discord.Embed(title="⛔️ SETTINGS ERROR ⛔️",description="It appears your server does not have the `moderation` setting turned on!",colour=0xFFC600)
 		await bot.say(embed=embed)
 
 # Warn command
 @bot.command(pass_context=True)
 async def warn(ctx,member:discord.Member,*,reason="None"):
-	if ctx.message.author.server_permissions.manage_messages == True:
-		dbhandler.addwarning(ctx,member)
-		status=str(dbhandler.warnings(ctx,member))
-		status = status.replace("'","")
-		status = status.replace("(","")
-		status = status.replace(")","")
-		status = status.replace(",","")
-		if status == "None":
-			embed=discord.Embed(title="⛔️ Database Error ⛔️",description=ctx.message.author.mention+"\nIt appears that the person you are trying to warn is not in the database, this means they have not talked in the server! This is required to warn someone!",colour=0xFFC600)
-			await bot.say(embed=embed)
-		else:
-			if int(status) >= 5:
-				await bot.kick(member)
-				embed=discord.Embed(title="⚒️ AUTO-KICK ⚒️",description=member.display_name+" has been kicked for exceeding the warn limit on this server, they had `"+status+"` warnings!",colour=0xFFC600)
+	setting = "moderation"
+	status = str(dbhandler.settingcheck(ctx,setting))
+	status = status.replace("[","")
+	status = status.replace("]","")
+	status = status.replace("'","")
+	status = status.replace("(","")
+	status = status.replace(")","")
+	status = status.replace(",","")
+	if status == "on":
+		if ctx.message.author.server_permissions.manage_messages == True:
+			dbhandler.addwarning(ctx,member)
+			status=str(dbhandler.warnings(ctx,member))
+			status = status.replace("'","")
+			status = status.replace("(","")
+			status = status.replace(")","")
+			status = status.replace(",","")
+			if status == "None":
+				embed=discord.Embed(title="⛔️ Database Error ⛔️",description=ctx.message.author.mention+"\nIt appears that the person you are trying to warn is not in the database, this means they have not talked in the server! This is required to warn someone!",colour=0xFFC600)
 				await bot.say(embed=embed)
 			else:
-				embed=discord.Embed(title="❗️ WARNING ❗️",description=member.display_name+" you have been warned by "+ctx.message.author.display_name+"\nReason : `"+str(reason)+"`\nYou now have `"+status+"` warnings!",colour=0xFFC600)
-				await bot.say(embed=embed)		
+				if int(status) >= 5:
+					await bot.kick(member)
+					embed=discord.Embed(title="⚒️ AUTO-KICK ⚒️",description=member.display_name+" has been kicked for exceeding the warn limit on this server, they had `"+status+"` warnings!",colour=0xFFC600)
+					await bot.say(embed=embed)
+				else:
+					embed=discord.Embed(title="❗️ WARNING ❗️",description=member.display_name+" you have been warned by "+ctx.message.author.display_name+"\nReason : `"+str(reason)+"`\nYou now have `"+status+"` warnings!",colour=0xFFC600)
+					await bot.say(embed=embed)		
+		else:
+			embed=discord.Embed(title="⛔️ Permission Error ⛔️",description=ctx.message.author.mention+"\nIt appears that you do not have the permission to manage messages, which is required to warn someone!",colour=0xFFC600)
+			await bot.say(embed=embed)
 	else:
-		embed=discord.Embed(title="⛔️ Permission Error ⛔️",description=ctx.message.author.mention+"\nIt appears that you do not have the permission to manage messages, which is required to warn someone!",colour=0xFFC600)
+		embed=discord.Embed(title="⛔️ SETTINGS ERROR ⛔️",description="It appears your server does not have the `moderation` setting turned on!",colour=0xFFC600)
 		await bot.say(embed=embed)
 
 # Kick command
 @bot.command(pass_context=True)
 async def kick(ctx,member:discord.Member,*,reason="None"):
-	if ctx.message.author.server_permissions.kick_members == True:
-		await bot.kick(member)
-		embed=discord.Embed(title="⚒️ KICKED ⚒️",description=member.display_name+" has been kicked by "+ctx.message.author.display_name+"\nReason : `"+str(reason)+"`",colour=0xFFC600)
-		await bot.say(embed=embed)
+	setting = "moderation"
+	status = str(dbhandler.settingcheck(ctx,setting))
+	status = status.replace("[","")
+	status = status.replace("]","")
+	status = status.replace("'","")
+	status = status.replace("(","")
+	status = status.replace(")","")
+	status = status.replace(",","")
+	if status == "on":
+		if ctx.message.author.server_permissions.kick_members == True:
+			await bot.kick(member)
+			embed=discord.Embed(title="⚒️ KICKED ⚒️",description=member.display_name+" has been kicked by "+ctx.message.author.display_name+"\nReason : `"+str(reason)+"`",colour=0xFFC600)
+			await bot.say(embed=embed)
+		else:
+			embed=discord.Embed(title="⛔️ Permission Error ⛔️",description=ctx.message.author.mention+"\nIt appears that you do not have the permission to Kick Members, which is required to kick someone!",colour=0xFFC600)
+			await bot.say(embed=embed)
 	else:
-		embed=discord.Embed(title="⛔️ Permission Error ⛔️",description=ctx.message.author.mention+"\nIt appears that you do not have the permission to Kick Members, which is required to kick someone!",colour=0xFFC600)
+		embed=discord.Embed(title="⛔️ SETTINGS ERROR ⛔️",description="It appears your server does not have the `moderation` setting turned on!",colour=0xFFC600)
 		await bot.say(embed=embed)
+			
 # Ban command
 @bot.command(pass_context=True)
 async def ban(ctx,member:discord.Member,*,reason="None"):
-	if ctx.message.author.server_permissions.ban_members == True:
-		await bot.ban(member)
-		embed=discord.Embed(title="⚒️ BANNED ⚒️",description=member.display_name+" has been banned by "+ctx.message.author.display_name+"\nReason : `"+str(reason)+"`",colour=0xFFC600)
-		await bot.say(embed=embed)
+	setting = "moderation"
+	status = str(dbhandler.settingcheck(ctx,setting))
+	status = status.replace("[","")
+	status = status.replace("]","")
+	status = status.replace("'","")
+	status = status.replace("(","")
+	status = status.replace(")","")
+	status = status.replace(",","")
+	if status == "on":
+		if ctx.message.author.server_permissions.ban_members == True:
+			await bot.ban(member)
+			embed=discord.Embed(title="⚒️ BANNED ⚒️",description=member.display_name+" has been banned by "+ctx.message.author.display_name+"\nReason : `"+str(reason)+"`",colour=0xFFC600)
+			await bot.say(embed=embed)
+		else:
+			embed=discord.Embed(title="⛔️ Permission Error ⛔️",description=ctx.message.author.mention+"\nIt appears that you do not have the permission to ban Members, which is required to ban someone!",colour=0xFFC600)
+			await bot.say(embed=embed)
 	else:
-		embed=discord.Embed(title="⛔️ Permission Error ⛔️",description=ctx.message.author.mention+"\nIt appears that you do not have the permission to ban Members, which is required to ban someone!",colour=0xFFC600)
+		embed=discord.Embed(title="⛔️ SETTINGS ERROR ⛔️",description="It appears your server does not have the `moderation` setting turned on!",colour=0xFFC600)
 		await bot.say(embed=embed)
 
 # Purge command
