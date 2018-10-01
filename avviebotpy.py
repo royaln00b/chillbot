@@ -279,7 +279,7 @@ async def on_message(message):
 
 @bot.event
 async def on_command_error(error, args):
-	await bot.send_message(error.channel,"An error occured : "+error+" due to "+args)
+	await bot.say("An error occured : "+error+" due to "+args)
 	
 
 """
