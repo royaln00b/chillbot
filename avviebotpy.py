@@ -276,6 +276,12 @@ async def on_message(message):
 	dbhandler.addserveronmessage(message)
 	dbhandler.addwarnsonmessage(message)
 	await bot.process_commands(message)
+
+@bot.event	
+async def on_error(ctx, error, args, kwargs):
+	await bot.send_message(ctx.message.channel,"And Error occured : "+error+" due to "+args+" - "+kwargs)
+	
+
 """
 @bot.event
 async def on_member_join(member):
