@@ -277,9 +277,9 @@ async def on_message(message):
 	dbhandler.addwarnsonmessage(message)
 	await bot.process_commands(message)
 
-@bot.event	
-async def on_error(ctx, error, args, kwargs):
-	await bot.send_message(ctx.message.channel,"And Error occured : "+error+" due to "+args+" - "+kwargs)
+@bot.event
+async def on_error(ctx, error):
+	await bot.send_message(ctx.message.channel,"An error occured : "+error)
 	
 
 """
