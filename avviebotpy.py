@@ -279,8 +279,9 @@ async def on_message(message):
 
 @bot.event
 async def on_command_error(event, *args, **kwargs):
-    message = args[0]
-    await bot.send_message(message.message.channel, "You caused an error! -> "+str(event))
+	message = args[0]
+	embed=discord.Embed(title="⛔️ ERROR ⛔️",description=message.message.author+", you have caused and error!\n\n"+str(event)+"\nCaused by:\n"+str(*args),colour=0xFFC600)
+	await bot.send_message(message.message.channel, embed=embed)
 
 """
 @bot.event
