@@ -152,10 +152,13 @@ async def mute(ctx,member:discord.Member,*,reason="None"):
 				await bot.add_roles(member,discord.utils.get(ctx.message.server.roles, name="Muted"))
 				await bot.say(embed=embed)
 			else:
-				# !!!!!!!!!!!!! FIX ME !!!!!!!!!!
 				await bot.create_role(server=ctx.message.server,name="Muted",permissions=discord.Permissions(send_messages=0))
 				embed=discord.Embed(title="Success",description="I have created a new role called `Muted` which will allow you to mute people.",colour=0xFFC600)
 				await bot.say(embed=embed)
+				embed1=discord.Embed(title="🤐 Mute 🤐",description='{}, you have been muted. \nReason : `'.format(member.display_name)+reason+'`',colour=0xFFC600)
+				await asyncio.sleep(1)
+				await bot.add_roles(member,discord.utils.get(ctx.message.server.roles, name="Muted"))
+				await bot.say(embed=embed1)
 		else:
 			embed=discord.Embed(title="⛔️ Permission Error ⛔️",description=ctx.message.author.mention+"\nIt appears that you do not have the permission to Manage Messages, which is required to mute someone!",colour=0xFFC600)
 			await bot.say(embed=embed)
