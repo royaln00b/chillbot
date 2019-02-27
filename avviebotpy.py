@@ -152,7 +152,7 @@ async def mute(ctx,member:discord.Member,*,reason="None"):
 				await bot.add_roles(member,discord.utils.get(ctx.message.server.roles, name="Muted"))
 				await bot.say(embed=embed)
 			else:
-				await bot.create_role(server=ctx.message.server,name="Muted",permissions=discord.PermissionOverwrite.send_messages(True))
+				await bot.create_role(server=ctx.message.server,name="Muted",permissions=discord.Permissions(send_messages=True))
 				embed=discord.Embed(title="Success",description="I have created a new role called `Muted` which will allow you to mute people.",colour=0xFFC600)
 				await bot.say(embed=embed)
 				embed1=discord.Embed(title="🤐 Mute 🤐",description='{}, you have been muted. \nReason : `'.format(member.display_name)+reason+'`',colour=0xFFC600)
