@@ -152,7 +152,7 @@ async def mute(ctx,member:discord.Member,*,reason="None"):
 				await bot.add_roles(member,discord.utils.get(ctx.message.server.roles, name="Muted"))
 				await bot.say(embed=embed)
 			else:
-				await bot.create_role(server=ctx.message.server,name="Muted",permissions=discord.PermissionOverwrite(send_messages=True))
+				await bot.create_role(server=ctx.message.server,name="Muted",permissions=discord.PermissionOverwrite.send_messages(True))
 				embed=discord.Embed(title="Success",description="I have created a new role called `Muted` which will allow you to mute people.",colour=0xFFC600)
 				await bot.say(embed=embed)
 				embed1=discord.Embed(title="🤐 Mute 🤐",description='{}, you have been muted. \nReason : `'.format(member.display_name)+reason+'`',colour=0xFFC600)
@@ -285,7 +285,7 @@ async def on_message(message):
 @bot.event
 async def on_command_error(event, *args, **kwargs):
 	message = args[0]
-	embed=discord.Embed(title="⛔️ ERROR ⛔️",description=message.message.author.name+", you have caused and error!\n\n`"+str(event)+"`\nPlease try again.",colour=0xFFC600)
+	embed=discord.Embed(title="⛔️ ERROR ⛔️",description=message.message.author.name+", you have caused an error!\n\n`"+str(event)+"`\nPlease try again.",colour=0xFFC600)
 	await bot.send_message(message.message.channel, embed=embed)
 
 """
