@@ -23,7 +23,8 @@ async def help(ctx,*,command=None):
 		embed=discord.Embed(title="❔ HELP ❔",description="Hi, welcome to the help file for **KING BOT**\n\n**Commands**\n-avatar\n-info -- This will show various information about a member / the server.\n-ping -- This will show the bot latency to discord.\n-warnings -- This command allows you to see the warnings of a member.",colour=0xFFC600)
 		embed.set_footer(text="Requested by : "+ctx.message.author.display_name, icon_url=ctx.message.author.avatar_url)
 		await bot.send_message(ctx.message.channel,embed=embed)
-	else if command == "avatar":
+	else:
+		if command == "avatar":
 		embed=discord.Embed(title="❔ HELP ❔",description="Hi, welcome to the help file for **KING BOT**\n\n**Avatar Command**\n This command will show the avatar of the selected user.",colour=0xFFC600)
 
 # Ping command
