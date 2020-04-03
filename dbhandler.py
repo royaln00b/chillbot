@@ -36,14 +36,14 @@ def addwarning(ctx,member):
 	c.execute('UPDATE warns SET warnings = warnings + 1 WHERE serverid = %s AND userid = %s', (ctx.message.server.id,member.id,))
 	conn.commit()
 
-def addserveronmessage(message):
+def addserveronmessage(ctx):
 	c.execute("SELECT serverid FROM settings")
 	rows = c.fetchall()
 	string = '\n'.join(str(row) for row in rows)
-	if not str(message.server.id) in string:
-		c.execute("INSERT INTO settings VALUES(%s,%s,%s)",(message.server.id,"moderation","off",))
-		c.execute("INSERT INTO settings VALUES(%s,%s,%s)",(message.server.id,"joins","off",))
-		c.execute("INSERT INTO settings VALUES(%s,%s,%s)",(message.server.id,"leaves","off",))
+	if not str(ctx.message.server.id) in string:
+		c.execute("INSERT INTO settings VALUES(%s,%s,%s)",(ctx.message.server.id,"moderation","off",))
+		c.execute("INSERT INTO settings VALUES(%s,%s,%s)",(ctx.message.server.id,"joins","off",))
+		c.execute("INSERT INTO settings VALUES(%s,%s,%s)",(ctx.message.server.id,"leaves","off",))
 		conn.commit()
 
 def addwarnsonmessage(message):
