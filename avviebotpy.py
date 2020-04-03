@@ -25,9 +25,9 @@ async def help(ctx,*,command=None):
 		await bot.send_message(ctx.message.channel,embed=embed)
 	else:
 		if command == "avatar":
-		embed=discord.Embed(title="❔ HELP ❔",description="Hi, welcome to the help file for **KING BOT**\n\n**Avatar Command**\n This command will show the avatar of the selected user.",colour=0xFFC600)
-		embed.set_footer(text="Requested by : "+ctx.message.author.display_name, icon_url=ctx.message.author.avatar_url)
-		await bot.send_message(ctx.message.channel,embed=embed)
+			embed=discord.Embed(title="❔ HELP ❔",description="Hi, welcome to the help file for **KING BOT**\n\n**Avatar Command**\n This command will show the avatar of the selected user.",colour=0xFFC600)
+			embed.set_footer(text="Requested by : "+ctx.message.author.display_name, icon_url=ctx.message.author.avatar_url)
+			await bot.send_message(ctx.message.channel,embed=embed)
 
 # Ping command
 @bot.command(pass_context=True)
